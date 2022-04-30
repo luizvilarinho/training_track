@@ -1,12 +1,12 @@
 export type Iworkout = {
-    id:string
+    id:number
     date: Date | null
     workouts: Array<Workout>
     lastTrainig: boolean
 }
 
 export type Workout = {
-    type: string // cardio | bodybuilding
+    type: number // cardio | bodybuilding
     description: string
-    sets: string
+    sets: number
 }

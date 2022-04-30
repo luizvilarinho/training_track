@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { Iworkout } from '../types';
 import Semana from './Semana';
 import {Idia} from './types';
 
 type Props = {
-   
+   workouts:Array<Iworkout>
+}
+
+type diasTreino = {
+    dia: number
+    workoutId: number
 }
 
 type IdiasArray = {
-    w1:Array<number>
-    w2:Array<number>
-    w3:Array<number>
-    w4:Array<number>
-    w5:Array<number>
+    w1:Array<diasTreino>
+    w2:Array<diasTreino>
+    w3:Array<diasTreino>
+    w4:Array<diasTreino>
+    w5:Array<diasTreino>
 }
 
-function AgendaContent(props: Props) {
+function AgendaContent({ workouts }:Props) {
 
     const [mes, setMes] = useState<string>('01');
     const [ano, setAno] = useState<string>('2022');
@@ -50,10 +56,13 @@ function AgendaContent(props: Props) {
         mesAtual = mesAtual.length === 1? '0' + mesAtual : mesAtual
 
         setMes(mesAtual)
-    }, [])
+
+        console.log("WORKOUTS AGENDA", workouts)
+    }, []);
+
     useEffect(()=>{
         diasArrayGenerator();
-    }, [ano, mes])
+    }, [ano, mes, workouts])
 
     function auxDiasNoMes(mes:number) {
         var anoParser = parseFloat(ano);
@@ -71,35 +80,57 @@ function AgendaContent(props: Props) {
         let w4 = []
         let w5 = []
          
-        w1 = primeirDiaDoMes === 0? new Array(6).fill(0) : new Array(parseFloat(primeirDiaDoMes) - 1).fill(0)
+        w1 = primeirDiaDoMes === 0? new Array(6).fill({dia:0, workoutId:0}) : new Array(parseFloat(primeirDiaDoMes) - 1).fill({dia:0, workoutId:0})
         var diasTotais = auxDiasNoMes(parseFloat(mes))
 
         
+        
         for(let i = 1; i <= diasTotais; i++){
             if(w1.length < 7){
-                w1.push(i)
+                auxVerifyIfHasTraining(i)
+                let workoutId = auxVerifyIfHasTraining(i)
+                w1.push({dia: i, workoutId })
             }else if (w2.length < 7) {
-                w2.push(i)
+                let workoutId = auxVerifyIfHasTraining(i)
+                w2.push({dia: i, workoutId})
             }else if(w3.length < 7) {
-                w3.push(i)
+                let workoutId = auxVerifyIfHasTraining(i)
+                w3.push({dia: i, workoutId})
             }else if(w4.length < 7) {
-                w4.push(i)
+                let workoutId = auxVerifyIfHasTraining(i)
+                w4.push({dia: i, workoutId})
             }else if(w5.length < 7 ) {
-                w5.push(i)
+                let workoutId = auxVerifyIfHasTraining(i)
+                w5.push({dia: i, workoutId})
             }
         }
         
         if(w5.length < 7){
             do{
-                w5.push(0)
+                w5.push({dia:0, workoutId:0})
             }while(w5.length < 7)
         }
         
         setDiasArray({...diasArray, w1,w2, w3, w4, w5 })
+        console.log("diasArray", diasArray)
     }
 
     function changeMonthHandler(e:string) {
         setMes(e)
+    }
+
+    //verify is the day has training and return de workoutId
+    function auxVerifyIfHasTraining(dia:number): number{
+        let diaParser = String(dia).length === 1 ? `0${dia}` : String(dia)
+        let incomingDate = `${diaParser}/${mes}/${ano}`;
+        
+        for(let i = 0; i < workouts.length; i++){
+           
+            if(String(workouts[i].date) === incomingDate){
+                return workouts[i].id
+            }
+        }
+        return 0
     }
 
     return (
@@ -119,11 +150,11 @@ function AgendaContent(props: Props) {
                 </div>
             </article>
             <div className="w-container">
-                <Semana label="w1" diasArray={diasArray.w1} />
-                <Semana label="w2" diasArray={diasArray.w2} />
-                <Semana label="w3" diasArray={diasArray.w3} />
-                <Semana label="w4" diasArray={diasArray.w4} />
-                <Semana label="w5"diasArray={diasArray.w5}  />
+                <Semana label="w1" diasArray={diasArray.w1} mes={mes}/>
+                <Semana label="w2" diasArray={diasArray.w2} mes={mes} />
+                <Semana label="w3" diasArray={diasArray.w3} mes={mes} />
+                <Semana label="w4" diasArray={diasArray.w4} mes={mes} />
+                <Semana label="w5"diasArray={diasArray.w5}  mes={mes} />
             </div>
         </>
     );

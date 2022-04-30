@@ -1,8 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-
-import HeaderComponent from "../components/HeaderComponent";
-import MenuComponent from '../components/MenuComponent';
 import Card from '../components/Card';
 import AgendaContent from '../components/AgendaContent';
 import Destaque from '../components/Destaque';
@@ -10,39 +7,43 @@ import Lista from '../components/Lista';
 import UltimoTreino from '../components/UltimoTreino';
 import { useEffect } from 'react';
 import useGet from '../components/hooks/useGet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const Home: NextPage = () => {
 
-const user = {
-  name: "Luiz Vilarinho"
-}
+
 
 const [dados, getTraining] = useGet({url: process.env.NEXT_PUBLIC_GETTRANING});
 
-
-
 useEffect(()=>{
-  
-  if(!dados){
     getTraining();
-  }
   
 }, []);
 
   return (
-    <div>
-      <HeaderComponent name={user.name}/>
-      <MenuComponent/>
+    <>
     
+    <Head>
+      <title>training track</title>
+    </Head>
+    <div>
+     
 
       <div className="main"> 
         
         <Card title="último treino" containerClass="flex-container gap-30">
-          <UltimoTreino workoutData={dados} />
+          {dados.loading ? 
+            <div className="loading-ico loading-center">
+              <FontAwesomeIcon icon={faSpinner} />
+            </div> : <UltimoTreino workoutData={dados.data[0]} />}
+            
+
+          
         </Card>
         
         <Card title="agenda" containerClass=""> 
-          <AgendaContent />
+          <AgendaContent workouts={dados.data}/>
         </Card>
         
         <Card title="essa semana" containerClass=''>
@@ -74,6 +75,7 @@ useEffect(()=>{
         </section>
       </div>
     </div>
+    </>
   )
 }
 

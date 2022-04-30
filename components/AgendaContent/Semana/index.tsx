@@ -4,7 +4,8 @@ import Dia from '../Dia';
 // import { Container } from './styles';
 type Props = {
     label:string
-    diasArray:Array<number>
+    diasArray:Array<{dia:number, workoutId:number}>
+    mes:string
 }
 
 function Semana(props:Props) {
@@ -16,9 +17,10 @@ function Semana(props:Props) {
                 <div className="gr">
                     <span>{ props.label }</span> 
                     <div className="dias-container">
-                        {props.diasArray.map((dia:number, idx:number)=>{
-                            let diaClass = dia === 0? 'dia off' : 'dia';
-                           return <Dia key={idx} day="dia" className={diaClass} />
+                        {props.diasArray.map((diaTreino:{dia:number, workoutId:number}, idx:number)=>{
+                            let diaClass = diaTreino.dia === 0? 'dia off' : 'dia';
+                            diaClass += diaTreino.workoutId != 0? ' worked' : ''
+                           return <Dia key={idx} day={String(diaTreino.dia)} className={diaClass} mes={props.mes} workoutId={diaTreino.workoutId} />
                         })}
                        
                     </div>

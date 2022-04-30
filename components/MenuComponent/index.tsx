@@ -2,11 +2,14 @@ import Btn from "./Btn";
 import Container from "./Container";
 
 const MenuComponent = ()=>{
+
+  
+
     return (
         <Container>
-            <Btn btnName="home"/>
-            <Btn btnName="+ treino"/>
-            <Btn btnName="tools"/>
+            <Btn href="/" btnName="home"/>
+            <Btn href="./adicionar-treino" btnName="+ treino"/>
+            <Btn href="ferramentas" btnName="tools"/>
         </Container>
               
     )

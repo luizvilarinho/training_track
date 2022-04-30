@@ -1,0 +1,10 @@
+.loginMenu{
+    padding: 15px 0;
+    margin-right: 25px;
+    color: rgb(219, 215, 230);
+    cursor: pointer;
+}
+.flex{
+    display: flex;
+    justify-content: flex-end;
+}
