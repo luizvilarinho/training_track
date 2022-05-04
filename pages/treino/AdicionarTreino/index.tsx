@@ -1,4 +1,4 @@
-import { faCircleMinus, faCirclePlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft, faCircleMinus, faCirclePlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import React, { Fragment, useEffect, useState } from 'react';
@@ -222,6 +222,26 @@ function AdicionarTreino(props: Props) {
 
     }
 
+    function voltarHandler(){
+
+        if(router.query.editar){
+            
+            let [y,m,d] = date.split('-')
+            router.push({
+                pathname:'/treino',
+                query:{workoutid: router.query.workoutid, calendar: `${d}/${m}/${y}`}
+            })
+
+        }else{
+
+            router.push({
+                pathname:'/'
+            })
+
+        }
+
+    }
+
     useEffect(()=>{
         if(putDados.data[0]?.success){
             router.push({
@@ -352,10 +372,23 @@ function AdicionarTreino(props: Props) {
             )}
             {router.query.editar ? (
                 <div className="align--center xl-mar--top">
+                    <button className="secundary-btn md-mar--right" onClick={voltarHandler}>
+                        <span style={{marginRight:'5px'}}>
+                            <FontAwesomeIcon icon={faCircleArrowLeft} />
+                        </span>
+                        voltar
+                    </button>
                     <button onClick={atualizarTreino}>atualizar</button>
                 </div>
+                
             ) : (
                 <div className="align--center xl-mar--top">
+                    <button className="secundary-btn md-mar--right" onClick={voltarHandler}>
+                        <span style={{marginRight:'5px'}}>
+                            <FontAwesomeIcon icon={faCircleArrowLeft} />
+                        </span>
+                        voltar
+                    </button>
                     <button onClick={addTraining}>adicionar</button>
                 </div>
             )}

@@ -42,7 +42,13 @@ const VisualizarTreino: React.FC = (props) => {
         }
     }, [deleteDados])
 
-  return (
+    function voltarHandler(){
+        router.push({
+            pathname:'/'
+        })
+    }
+
+    return (
       <Fragment>
           <div className="search-container md-mar--bottom">
             <label className="sm-mar--bottom">Pesquisar por data</label>
@@ -81,14 +87,14 @@ const VisualizarTreino: React.FC = (props) => {
                 </div>
           </Card>
            
-          <div className="buttons-container align--center xl-mar--top">
-                    <button className="secundary-btn">
-                        <span style={{marginRight:'5px'}}>
-                            <FontAwesomeIcon icon={faCircleArrowLeft} />
-
-                        </span>
-                     voltar</button>
-                </div>
+        <div className="buttons-container align--center xl-mar--top" >
+            <button className="secundary-btn" onClick={voltarHandler}>
+                <span style={{marginRight:'5px'}}>
+                    <FontAwesomeIcon icon={faCircleArrowLeft} />
+                </span>
+                voltar
+            </button>
+        </div>
       </Fragment>
   );
 }

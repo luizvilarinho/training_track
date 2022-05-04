@@ -238,6 +238,12 @@ select{
 .md-mar--right{
   margin-right: 30px;
 }
+.sm-mar--left{
+  margin-left: 15px;
+}
+.md-mar--left{
+  margin-left: 30px;
+}
 .flex-container-collumn{
   display: flex;
   flex-direction: column;
