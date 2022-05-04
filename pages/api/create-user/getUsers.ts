@@ -6,6 +6,6 @@ export async function getUsers(prisma:PrismaClient) {
 
 
     
-    return allUsers
+    return [allUsers]
 }
 

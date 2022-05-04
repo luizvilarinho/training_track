@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 type Props = {
@@ -10,6 +11,7 @@ const inicialValues = {
 
 function getHandler(props:Props){
 
+    const router = useRouter()
     const [dados, setDados] = useState<any>(inicialValues);
     
     function getCall(){
@@ -21,8 +23,16 @@ function getHandler(props:Props){
                 'Content-Type': 'application/json',
             }
             }).then(response=>{
-                
+                if(response.status === 401){
+                    router.push({
+                        pathname:'/login'
+                    })
+
+                    return 
+                }
+
                 response.json().then((resp: any)=>{
+                   
                     setDados({...dados,data:[...resp], loading:false});
                     
                 })

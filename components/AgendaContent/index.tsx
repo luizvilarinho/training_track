@@ -146,7 +146,7 @@ function AgendaContent({ workouts }:Props) {
                     {labelSemana.map((item, idx) => <div key={idx}>{item}</div>)}
                 </div>
             </article>
-            <div className="w-container">
+            <div className="w-container sm-mar--bottom">
                 <Semana label="w1" diasArray={diasArray.w1} mes={mes}/>
                 <Semana label="w2" diasArray={diasArray.w2} mes={mes} />
                 <Semana label="w3" diasArray={diasArray.w3} mes={mes} />

@@ -9,7 +9,7 @@ const MenuComponent = ()=>{
         <Container>
             <Btn href="/" btnName="home"/>
             <Btn href="./treino" btnName="+ treino"/>
-            <Btn href="ferramentas" btnName="tools"/>
+            {/* <Btn href="ferramentas" btnName="tools"/> */}
         </Container>
               
     )

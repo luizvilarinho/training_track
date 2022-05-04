@@ -8,7 +8,7 @@ type Props = {
 
 function Card(props: Props) {
     return (
-        <section>
+        <section style={{margin:'10px', padding:'15px'}}>
             <h3>{props.title}</h3>
             <article className={props.containerClass}>
                 

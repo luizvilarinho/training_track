@@ -21,6 +21,7 @@ export default async function createUser(request: NextApiRequest, response: Next
                 var cookies = new Cookies(request, response, { keys: keys })
                 cookies.set('accesstoken', resp.token, { signed: true });
 
+                console.log("RESPLOGIN", resp)
                 response.status(200).json(resp)
 
             }, (error)=> {
