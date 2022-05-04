@@ -24,29 +24,31 @@ useEffect(()=>{
   return (
     <>
     
-    <Head>
-      <title>training track</title>
-    </Head>
-    <div>
-        
-      <Card title="último treino" containerClass="flex-container gap-30">
-        {dados.loading ? 
-          <div className="loading-ico loading-center">
-            <FontAwesomeIcon icon={faSpinner} />
-          </div> : <UltimoTreino workoutData={dados.data[0]} />}
-      </Card>
+      <Head>
+        <title>training track</title>
+      </Head>
+      <div>
+      
+      {dados.data.length > 0 &&
+        <Card title="último treino" containerClass="flex-container gap-30">
+          {dados.loading ? 
+            <div className="loading-ico loading-center">
+              <FontAwesomeIcon icon={faSpinner} />
+            </div> : <UltimoTreino workoutData={dados.data[0]} />}
+        </Card>
+      }
       
       <Card title="agenda" containerClass=""> 
         <AgendaContent workouts={dados.data}/>
       </Card>
       
-      <Card title="essa semana" containerClass=''>
+      {/* <Card title="essa semana" containerClass=''>
           
         <Destaque subtitle="treino geral"/>       
                 
-      </Card>
+      </Card> */}
       
-      <section id="last-section">
+      <section hidden id="last-section">
         <Card title="último mês" containerClass=''>
             
           <Lista muscle="peitoral" sets={4} />

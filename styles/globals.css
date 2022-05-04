@@ -36,7 +36,6 @@ span{
   vertical-align: middle;
 }
 div.main{
-  padding: 10px;
   max-width: 900px;
   min-height: 900px;
   margin: 0 auto;
@@ -130,7 +129,7 @@ nav{
 nav ul{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
 }
