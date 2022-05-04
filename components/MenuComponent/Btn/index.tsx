@@ -12,7 +12,6 @@ const Btn = (props:Props)=>{
         e.preventDefault()
         router.push(props.href)
 
-        console.log(router)
     }
 
     return (

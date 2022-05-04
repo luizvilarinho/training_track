@@ -12,6 +12,20 @@ type Props = {
 
 function UltimoTreino({ workoutData }: Props) {
 
+  const [treinosMusculacao, setTreinosMusculacao] = useState<any>();
+  const [treinosCardio, setTreinosCardio] = useState<any>();
+
+  useEffect(()=>{
+    if((!treinosMusculacao || !treinosCardio) && workoutData != undefined){
+        let cardios = workoutData.training.filter((treino:Workout)=> treino.type === 2)
+        let musculacao = workoutData.training.filter((treino:Workout)=> treino.type === 1)
+
+        console.log(cardios, musculacao)
+        setTreinosCardio(cardios)
+        setTreinosMusculacao(musculacao)
+
+    }
+  }, [treinosMusculacao, treinosCardio, workoutData])
 
     return (
         <>
@@ -22,25 +36,26 @@ function UltimoTreino({ workoutData }: Props) {
           
           <div>
             <div>
-              <h4>musculação</h4>
-              {workoutData && workoutData.training && workoutData.training.map((workout:Workout, idx:number): any=>{
-                  if( workout.type === 1 ){
-                    return <div key={idx} className="flex-container space-between">
+            
+              {treinosMusculacao && treinosMusculacao.length > 0 && <h4>musculação</h4>}
+              {treinosMusculacao && treinosMusculacao.map((workout:Workout)=>{
+                    return (<div key={workout.id} className="flex-container space-between sm-mar--bottom">
                         <div className="md-mar--right">{workout.description}</div>
                         <div className="bold">{workout.sets} séries</div>
-                    </div>
-                  }
-
-                  if(workout.type === 2){
-                     return <div key={idx} className="sm-mar--top">
-                                <h4>cardio</h4>
-                                <div className="flex-container space-between">
-                                    <div className="md-mar--right">elíptico</div>
-                                    <div className="bold">35 min</div>
-                                </div>
-                            </div>
-                  }
+                    </div>)
+                 
                   
+                  
+              })}
+
+              {treinosCardio && treinosCardio.length > 0 && <h4 className="sm-mar--top">cardio</h4>}
+              {treinosCardio && treinosCardio.map((cardio:any)=>{
+                 return <div key={cardio.id} className="sm-mar--bottom">
+                      <div className="flex-container space-between">
+                          <div className="md-mar--right">{cardio.description}</div>
+                          <div className="bold">{cardio.sets} min</div>
+                      </div>
+                  </div>
               })}
               
             </div>

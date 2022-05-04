@@ -73,7 +73,6 @@ function calendarRender(){
     document.querySelector(".w-container").innerHTML = ""  
 
     var dias = auxRenderCalendar.diasArray();
-    console.log(dias)
     //w1
     let w1Template = auxRenderCalendar.wIteration(dias.w1, 'w1');
     let w2Template = auxRenderCalendar.wIteration(dias.w2, 'w2');

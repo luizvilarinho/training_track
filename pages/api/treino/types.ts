@@ -8,8 +8,8 @@ export type Workout = {
 
 export type Training = {
     id?: number
-    group_type: string // cardio | bodybuilding
+    type: number // cardio | bodybuilding
     description: string
-    sets: string
+    sets: number
     workoutId?:number
 }

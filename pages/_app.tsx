@@ -15,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Fragment>
         <HeaderComponent name={user.name}/>
         <MenuComponent/>
-        <Component {...pageProps} />
+        <div className="main">
+          <Component {...pageProps} />
+        </div>
     </Fragment>
     
 

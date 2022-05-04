@@ -28,52 +28,45 @@ useEffect(()=>{
       <title>training track</title>
     </Head>
     <div>
-     
-
-      <div className="main"> 
         
-        <Card title="último treino" containerClass="flex-container gap-30">
-          {dados.loading ? 
-            <div className="loading-ico loading-center">
-              <FontAwesomeIcon icon={faSpinner} />
-            </div> : <UltimoTreino workoutData={dados.data[0]} />}
-            
-
+      <Card title="último treino" containerClass="flex-container gap-30">
+        {dados.loading ? 
+          <div className="loading-ico loading-center">
+            <FontAwesomeIcon icon={faSpinner} />
+          </div> : <UltimoTreino workoutData={dados.data[0]} />}
+      </Card>
+      
+      <Card title="agenda" containerClass=""> 
+        <AgendaContent workouts={dados.data}/>
+      </Card>
+      
+      <Card title="essa semana" containerClass=''>
           
-        </Card>
-        
-        <Card title="agenda" containerClass=""> 
-          <AgendaContent workouts={dados.data}/>
-        </Card>
-        
-        <Card title="essa semana" containerClass=''>
+        <Destaque subtitle="treino geral"/>       
+                
+      </Card>
+      
+      <section id="last-section">
+        <Card title="último mês" containerClass=''>
             
-          <Destaque subtitle="treino geral"/>       
-                  
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="peitoral" sets={4} />
+          <Lista muscle="cardio" sets={150} />
+            
+          {/* <div className="sm-mar--top">
+              <h4>cardio</h4>
+              <div className="flex-container space-between">
+                  <div className="md-mar--right">elíptico</div>
+                  <div className="bold">35 min</div>
+              </div>
+          </div> */}
         </Card>
-        
-        <section id="last-section">
-          <Card title="último mês" containerClass=''>
-              
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="peitoral" sets={4} />
-            <Lista muscle="cardio" sets={150} />
-              
-            {/* <div className="sm-mar--top">
-                <h4>cardio</h4>
-                <div className="flex-container space-between">
-                    <div className="md-mar--right">elíptico</div>
-                    <div className="bold">35 min</div>
-                </div>
-            </div> */}
-          </Card>
 
-        </section>
-      </div>
+      </section>
     </div>
     </>
   )

@@ -19,10 +19,12 @@
     animation-duration: 1500ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear; 
+    display: inline-block;
 }
 .loading-center{
     margin:0 auto;
     padding: 25px;
+    text-align: center;
 }
 
 @keyframes spin {

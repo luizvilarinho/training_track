@@ -2,46 +2,36 @@ import { useState } from "react";
 
 type Props = {
     url:any;
-    payload:any | null
 }
 
 const initialState = {
-    data: {},
+    data: [],
     loading: false
 };
 
-function postHandler(props:Props){
+function deleteHandler(props:Props){
 
     const [dados, setDados] = useState<any>(initialState);
 
-    function postCall(payloadCall?:any){
-        let payload;
-        if(props.payload === null){
-            payload = payloadCall;
-        }else{
-            payload = props.payload
-        }
+    function deleteCall(){
 
-        if(!payload) false
-
-        setDados({...initialState, loading:true});
+            setDados({...initialState, loading:true});
         
-
             fetch(props.url, {
-            method:'POST',
+            method:'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify(payload)
             }).then(response=>{
                 response.json().then((data: any)=>{
                     setDados({...dados, data, loading:false});
+                    console.log("DATA", data)
                 })
             })
 
     }
 
-    return [dados, postCall]
+    return [dados, deleteCall]
 }
 
-export default postHandler;
+export default deleteHandler;

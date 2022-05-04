@@ -20,7 +20,7 @@ model tb_user {
 
 model tb_workout {
   id           Int        @id @default(autoincrement())
-  user         tb_user    @relation(fields: [userId], references: [id])
+  user         tb_user    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int        
   training     tb_group[]
   lastTraining Boolean
@@ -32,7 +32,7 @@ model tb_group {
   type         Int
   description  String
   sets         Int
-  tb_workout   tb_workout?   @relation(fields: [tb_workoutId], references: [id])
+  tb_workout   tb_workout?   @relation(fields: [tb_workoutId], references: [id], onDelete: Cascade)
   tb_workoutId Int
 }
 

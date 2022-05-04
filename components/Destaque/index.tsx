@@ -20,7 +20,7 @@ function Destaque(props:Props ) {
             <Group muscle="peitoral" sets={4} isCardio={false} />
             <Group muscle="peitoral" sets={4} isCardio={false} />
             <Group muscle="peitoral" sets={4} isCardio={false} />
-            <Group muscle="peitoral" sets={128} isCardio={true} />
+            <Group muscle="esteira" sets={128} isCardio={true} />
           
           
          

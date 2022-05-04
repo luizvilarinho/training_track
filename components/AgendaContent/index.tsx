@@ -57,7 +57,6 @@ function AgendaContent({ workouts }:Props) {
 
         setMes(mesAtual)
 
-        console.log("WORKOUTS AGENDA", workouts)
     }, []);
 
     useEffect(()=>{
@@ -87,7 +86,6 @@ function AgendaContent({ workouts }:Props) {
         
         for(let i = 1; i <= diasTotais; i++){
             if(w1.length < 7){
-                auxVerifyIfHasTraining(i)
                 let workoutId = auxVerifyIfHasTraining(i)
                 w1.push({dia: i, workoutId })
             }else if (w2.length < 7) {
@@ -112,7 +110,6 @@ function AgendaContent({ workouts }:Props) {
         }
         
         setDiasArray({...diasArray, w1,w2, w3, w4, w5 })
-        console.log("diasArray", diasArray)
     }
 
     function changeMonthHandler(e:string) {
@@ -127,7 +124,7 @@ function AgendaContent({ workouts }:Props) {
         for(let i = 0; i < workouts.length; i++){
            
             if(String(workouts[i].date) === incomingDate){
-                return workouts[i].id
+                return Number(workouts[i].id)
             }
         }
         return 0

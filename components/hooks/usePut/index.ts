@@ -10,11 +10,11 @@ const initialState = {
     loading: false
 };
 
-function postHandler(props:Props){
+function putHandler(props:Props){
 
     const [dados, setDados] = useState<any>(initialState);
 
-    function postCall(payloadCall?:any){
+    function puttCall(payloadCall?:any){
         let payload;
         if(props.payload === null){
             payload = payloadCall;
@@ -24,24 +24,24 @@ function postHandler(props:Props){
 
         if(!payload) false
 
-        setDados({...initialState, loading:true});
+            setDados({...initialState, loading:true});
         
-
             fetch(props.url, {
-            method:'POST',
+            method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify(payload)
             }).then(response=>{
                 response.json().then((data: any)=>{
-                    setDados({...dados, data, loading:false});
+                    setDados({...{data}, loading:false});
+                    console.log("DATA", data)
                 })
             })
 
     }
 
-    return [dados, postCall]
+    return [dados, puttCall]
 }
 
-export default postHandler;
+export default putHandler;

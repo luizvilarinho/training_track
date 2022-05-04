@@ -3,6 +3,7 @@ import { Auth } from "../middleware/auth"
 import { getTreino } from "./getTreino";
 import { PrismaClient } from "@prisma/client";
 import { postTreino } from "./postTreino";
+import { getTreinoById } from "./getTrainoById";
 
 const prisma:PrismaClient = new PrismaClient()
 
@@ -27,12 +28,25 @@ async function treinoHandler(request: NextApiRequest, response: NextApiResponse)
     switch(request.method){
         case 'GET':
             //gettreino
-            getTreino(prisma, userId).then((resp)=>{
-                response.status(200).json(resp)
-            }).finally(()=>{
-                console.log("DISCONECT")
-                prisma.$disconnect();
-            })
+            let { workoutid } = request.query;
+
+            console.log(workoutid, request.query);
+            if(workoutid){
+                getTreinoById(prisma, String(workoutid)).then((resp)=>{
+                    response.status(200).json(resp)
+                }).finally(()=>{
+                    console.log("DISCONECT")
+                    prisma.$disconnect();
+                })
+            }else{
+                getTreino(prisma, userId).then((resp)=>{
+                    response.status(200).json(resp)
+                }).finally(()=>{
+                    console.log("DISCONECT")
+                    prisma.$disconnect();
+                })
+
+            }
             
         break;
 

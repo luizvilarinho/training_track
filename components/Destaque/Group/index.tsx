@@ -6,6 +6,7 @@ type Props = {
     muscle:string
     sets:number
     isCardio:boolean
+    width?:string
 }
 
 
@@ -16,12 +17,14 @@ function Group(props:Props) {
     const labelSets = props.isCardio? 'min' : 'series'
     return (
         <>
-            <div className={`grupo-musculacao ${cardioClass}` }>
-                <div className="chave">{ props.muscle}</div>
+            <div className={`grupo-musculacao ${cardioClass} ${props.width}` }>
                 
-                {props.isCardio && (
-                    <Image className="img-title" src={heart} />
-                )}
+                <div className="chave">{ props.muscle}
+                    {props.isCardio && (
+                        <Image className="img-title" src={heart} />
+                    )}
+                </div>
+                
                 <div className="bold valor">{props.sets} {labelSets}</div>
             </div>
         </>

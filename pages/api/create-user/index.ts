@@ -26,7 +26,6 @@ export default async function createUser(request: NextApiRequest, response: Next
       .catch((e)=>{
         response.status(400).json({ message:e })
       }).finally(()=>{
-        console.log("finalizar conexao ...");
         prisma.$disconnect()
       })
       
