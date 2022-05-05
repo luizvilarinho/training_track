@@ -10,7 +10,7 @@ const initialState = {
     loading: false
 };
 
-function postHandler(props:Props){
+function PostHandler(props:Props){
 
     const [dados, setDados] = useState<any>(initialState);
 
@@ -44,4 +44,4 @@ function postHandler(props:Props){
     return [dados, postCall]
 }
 
-export default postHandler;
+export default PostHandler;

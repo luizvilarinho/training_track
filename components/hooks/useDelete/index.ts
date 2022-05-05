@@ -9,7 +9,7 @@ const initialState = {
     loading: false
 };
 
-function deleteHandler(props:Props){
+function DeleteHandler(props:Props){
 
     const [dados, setDados] = useState<any>(initialState);
 
@@ -34,4 +34,4 @@ function deleteHandler(props:Props){
     return [dados, deleteCall]
 }
 
-export default deleteHandler;
+export default DeleteHandler;

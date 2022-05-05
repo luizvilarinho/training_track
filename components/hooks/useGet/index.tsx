@@ -9,7 +9,7 @@ const inicialValues = {
     loading:false
 }
 
-function getHandler(props:Props){
+function GetHandler(props:Props){
 
     const router = useRouter()
     const [dados, setDados] = useState<any>(inicialValues);
@@ -43,4 +43,4 @@ function getHandler(props:Props){
     return [dados, getCall]
 }
 
-export default getHandler;
+export default GetHandler;

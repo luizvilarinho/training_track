@@ -10,7 +10,7 @@ const initialState = {
     loading: false
 };
 
-function putHandler(props:Props){
+function PutHandler(props:Props){
 
     const [dados, setDados] = useState<any>(initialState);
 
@@ -44,4 +44,4 @@ function putHandler(props:Props){
     return [dados, puttCall]
 }
 
-export default putHandler;
+export default PutHandler;
