@@ -25,13 +25,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Fragment>
-      {router.pathname != '/login' && (
+      {router.pathname != '/login' && router.pathname != '/novo-usuario' ? (
         <Fragment>
           <HeaderComponent name={userData.data[0]?.name}/>
           <MenuComponent/>
         </Fragment>
 
-      )}
+      ) : ( <></> )}
         <div className="main">
           <Component {...pageProps} />
         </div>

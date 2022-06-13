@@ -17,7 +17,7 @@ export async function getTreino(prisma:PrismaClient, userId:number){
     })
     
     workout.map((item:any, idx:number)=>{
-        item.date = new Date(item.date).toLocaleDateString(); 
+        item.date = new Date(item.date).toLocaleDateString('pt-br'); 
     })
 
     return workout

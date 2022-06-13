@@ -18,7 +18,7 @@ const [dados, getTraining] = useGet({url: process.env.NEXT_PUBLIC_GETTRANING});
 
 useEffect(()=>{
     getTraining();
-  
+    
 }, []);
 
   return (

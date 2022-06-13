@@ -15,10 +15,13 @@ export default async function createUser(request: NextApiRequest, response: Next
         case 'POST':
 
             var keys = ['keyboard cat']
+            var cookies = new Cookies(request, response, { keys: keys })
+            
+            cookies.set('accesstoken', '');
 
             checkForUser(prisma, request.body).then((resp)=>{
 
-                var cookies = new Cookies(request, response, { keys: keys })
+                
                 cookies.set('accesstoken', resp.token, { signed: true });
 
                 console.log("RESPLOGIN", resp)

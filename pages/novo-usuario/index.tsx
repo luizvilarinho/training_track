@@ -1,59 +1,50 @@
-import { faCircleExclamation, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import router from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Card from '../../components/Card';
 import usePost from '../../components/hooks/usePost';
 import s from '../../styles/Login.module.css'
 
-function Login(){
+
+// import { Container } from './styles';
+
+function novoUsuario() {
 
     const [payloadForm, setPayloadForm] = useState({
         email:'',
-        password: ''
+        password: '',
+        nome:''
     });
+
+    const [typeInputPassword, setTypeInputPassword] = useState();
 
     const [response, httpPost] = usePost({url:process.env.NEXT_PUBLIC_LOGIN, payload:payloadForm})
 
-    useEffect(()=>{
-        console.log("RESPONSE", response);
-        if(response.data?.success){
-            router.push('/')
-        } 
-        
-    },[response]);
-    
     function sendHttpPostRequest(){
         //console.log("payload", payloadForm)
         httpPost();
     }
-
+    
     return (
-        <>
-        {response.loading && (
-            <Fragment>
-                <div className="loading">
-                    <div className="loading-ico">
-                        <FontAwesomeIcon icon={faSpinner} />
-                    </div>
-                </div>
-            </Fragment>
-        )}
-       
         <div className="main">
             <section id="top-alert">
                 <div className={s.flex}>
                     <div className={s.loginMenu}>
-                        <Link href="./novo-usuario">
-                            Novo Usuário
+                        <Link href="./login">
+                            Login
                         </Link>
                     </div>
                     {/* <div className={s.loginMenu}>Recuperação de senha</div> */}
                 </div>
             </section>
 
-            <Card title="Login" containerClass=''>
+            <Card title="novo usuário" containerClass=''>
+                    <div className="md-mar--top">
+                        <label htmlFor="nome" className={s.w100}>Nome</label>
+                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , nome:e.currentTarget.value})} id="nome" className="" placeholder="preencha seu nome" />
+
+                    </div>
                     <div className="md-mar--top">
                         <label htmlFor="email" className={s.w100}>Email</label>
                         <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , email:e.currentTarget.value})} id="email" className="" placeholder="preencha seu email" />
@@ -85,8 +76,7 @@ function Login(){
             </div>
 
         </div>
-        </>
-    )
+    );
 }
 
-export default Login;
+export default novoUsuario;

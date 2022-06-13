@@ -25,6 +25,9 @@
 a{
   color:var(--primary-color-dark);
 }
+#top-alert a{
+  color: var(--bg-color-light)
+}
 
 body{
   background-color: var(--bg-color-light);
