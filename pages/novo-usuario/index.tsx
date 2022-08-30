@@ -1,26 +1,33 @@
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import Card from '../../components/Card';
 import usePost from '../../components/hooks/usePost';
 import s from '../../styles/Login.module.css'
+import router from "next/router";
 
 
 // import { Container } from './styles';
 
-function novoUsuario() {
+const NovoUsuario =  () => {
 
     const [payloadForm, setPayloadForm] = useState({
         email:'',
         password: '',
-        nome:''
+        name:''
     });
 
     const [typeInputPassword, setTypeInputPassword] = useState();
 
-    const [response, httpPost] = usePost({url:process.env.NEXT_PUBLIC_LOGIN, payload:payloadForm})
+    const [response, httpPost] = usePost({url:process.env.NEXT_PUBLIC_CREATE_USER, payload:payloadForm})
 
+    useEffect(()=>{
+        //console.log("RESPONSE", response)
+        if(response.data?.success === true){
+            router.push('/login')
+        }
+    }, [response])
     function sendHttpPostRequest(){
         //console.log("payload", payloadForm)
         httpPost();
@@ -42,7 +49,7 @@ function novoUsuario() {
             <Card title="novo usuário" containerClass=''>
                     <div className="md-mar--top">
                         <label htmlFor="nome" className={s.w100}>Nome</label>
-                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , nome:e.currentTarget.value})} id="nome" className="" placeholder="preencha seu nome" />
+                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , name:e.currentTarget.value})} id="nome" className="" placeholder="preencha seu nome" />
 
                     </div>
                     <div className="md-mar--top">
@@ -79,4 +86,4 @@ function novoUsuario() {
     );
 }
 
-export default novoUsuario;
+export default NovoUsuario;

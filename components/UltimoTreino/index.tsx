@@ -30,7 +30,7 @@ function UltimoTreino({ workoutData }: Props) {
     return (
         <>
             <div className="flex-container-collumn align--center">
-            <Image src={calendar} width={30} height={30}/>
+            <Image src={calendar} width={30} height={30} alt="calendario" />
             <div className="sm-mar--top">{workoutData?.date}</div>
           </div>
           

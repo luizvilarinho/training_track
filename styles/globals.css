@@ -39,8 +39,9 @@ span{
   vertical-align: middle;
 }
 div.main{
-  max-width: 900px;
-  min-height: 900px;
+  max-width: 100vw;
+  min-height: 100vh;
+  height: calc(100vh + 250px);
   margin: 0 auto;
 
 }

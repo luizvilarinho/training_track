@@ -20,6 +20,7 @@ const VisualizarTreino: React.FC = (props) => {
 
     useEffect(()=>{
         getCall()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     function editHandler(){
@@ -40,7 +41,7 @@ const VisualizarTreino: React.FC = (props) => {
                 query: {workoutid: router.query.workoutid, editar: true}
             })
         }
-    }, [deleteDados])
+    }, [deleteDados, router])
 
     function voltarHandler(){
         router.push({
@@ -65,7 +66,7 @@ const VisualizarTreino: React.FC = (props) => {
                 :
                 <div>
                     <h4>
-                    <Image src={calendar} width={30} height={30} />
+                    <Image src={calendar} width={30} height={30} alt={'icone de Calendário'} />
                     {router.query.calendar}
                 </h4>
                 

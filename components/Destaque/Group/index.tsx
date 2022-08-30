@@ -21,7 +21,7 @@ function Group(props:Props) {
                 
                 <div className="chave">{ props.muscle}
                     {props.isCardio && (
-                        <Image className="img-title" src={heart} />
+                        <Image className="img-title" src={heart} alt="icone coracao" />
                     )}
                 </div>
                 

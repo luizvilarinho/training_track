@@ -15,13 +15,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(()=>{
       getUserCall();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(()=>{
-      if(router.pathname != '/login' && userData.data.length === 0){
-         getUserCall();
-      }
-  }, [router.pathname])
+  // useEffect(()=>{
+  //     if(router.pathname != '/login' && userData.data.length === 0){
+  //        getUserCall();
+  //     }
+  // }, [router.pathname])
 
   return (
     <Fragment>

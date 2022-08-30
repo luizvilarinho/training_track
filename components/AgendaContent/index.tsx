@@ -61,6 +61,7 @@ function AgendaContent({ workouts }:Props) {
 
     useEffect(()=>{
         diasArrayGenerator();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ano, mes, workouts])
 
     function auxDiasNoMes(mes:number) {

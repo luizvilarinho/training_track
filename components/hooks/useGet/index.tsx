@@ -23,7 +23,7 @@ function GetHandler(props:Props){
                 'Content-Type': 'application/json',
             }
             }).then(response=>{
-                if(response.status === 401){
+                if(response.status === 401 || response.status === 500){
                     router.push({
                         pathname:'/login'
                     })

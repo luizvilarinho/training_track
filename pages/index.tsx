@@ -2,10 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Card from '../components/Card';
 import AgendaContent from '../components/AgendaContent';
-import Destaque from '../components/Destaque';
 import Lista from '../components/Lista';
 import UltimoTreino from '../components/UltimoTreino';
-import { useEffect } from 'react';
+import {Fragment, useEffect} from 'react';
 import useGet from '../components/hooks/useGet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +17,7 @@ const [dados, getTraining] = useGet({url: process.env.NEXT_PUBLIC_GETTRANING});
 
 useEffect(()=>{
     getTraining();
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   return (
@@ -28,7 +27,17 @@ useEffect(()=>{
         <title>training track</title>
       </Head>
       <div>
-      
+
+      {/*{Object.keys(dados.data).length === 0 && (*/}
+      {/*    <Fragment>*/}
+      {/*        <div className="loading">*/}
+      {/*            <div className="loading-ico">*/}
+      {/*                <FontAwesomeIcon icon={faSpinner} />*/}
+      {/*            </div>*/}
+      {/*        </div>*/}
+      {/*    </Fragment>*/}
+      {/*)}*/}
+
       {dados.data.length > 0 &&
         <Card title="último treino" containerClass="flex-container gap-30">
           {dados.loading ? 

@@ -11,6 +11,7 @@ export async function create(prisma:PrismaClient, body:UserType) {
       password: body.password
     }
 
+    console.log("DATA", data)
     await prisma.tb_user.create({data})
 
     return data;

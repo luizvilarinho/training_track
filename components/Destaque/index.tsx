@@ -12,7 +12,7 @@ function Destaque(props:Props ) {
     return (
         <>
             <h4>
-              <Image className="img-title" src={exercise_weights}/>
+              <Image className="img-title" src={exercise_weights} alt="destaque" />
               {props.subtitle}
             </h4>
             

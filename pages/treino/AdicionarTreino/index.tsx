@@ -67,7 +67,7 @@ function AdicionarTreino(props: Props) {
                pathname:'/'
            })
         }
-    }, [data])
+    }, [data, router])
 
     useEffect(()=>{
         if(router.query.editar){
@@ -80,6 +80,7 @@ function AdicionarTreino(props: Props) {
             let [d,m,y] = new Date().toLocaleDateString().split('/')
             setDate(`${y}-${m}-${d}`)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     useEffect(()=>{
@@ -115,11 +116,10 @@ function AdicionarTreino(props: Props) {
                
             })
 
-            console.log("DATE", treino.data[0].date)
             let [d, m, y] = treino.data[0].date.split('/')
             setDate(`${y}-${m}-${d}`)
         }
-    },[treino]);
+    },[treino, router.query.editar]);
 
     function payloadHandler():any{
         let [y,m,d] = date.split('-')
@@ -248,7 +248,7 @@ function AdicionarTreino(props: Props) {
                 pathname:'/'
             })
         }
-    },[putDados])
+    },[putDados,router])
 
     return (
         <Fragment>

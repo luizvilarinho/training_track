@@ -22,7 +22,7 @@ const HeaderComponent = (props:{name:string}) =>{
                 pathname:'/login'
             })
         }
-    }, [logoutData])
+    }, [logoutData, router])
 
     return (
         <section id="top-alert">
@@ -32,7 +32,7 @@ const HeaderComponent = (props:{name:string}) =>{
             </div>
             <div className="notification-length">1</div>
             <div className="alert-ico">
-                <Image src={circle_notifications_white_24dp} width={35} height={35} />
+                <Image src={circle_notifications_white_24dp} width={35} height={35} alt={'ícone circular'}/>
             </div>
         </section>
     )

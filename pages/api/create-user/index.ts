@@ -21,7 +21,7 @@ export default async function createUser(request: NextApiRequest, response: Next
     case 'POST':
 
       create(prisma, request.body).then(async (resp)=>{
-        response.status(201).json({data:resp})
+        response.status(201).json({success:true})
       })
       .catch((e)=>{
         response.status(400).json({ message:e })
