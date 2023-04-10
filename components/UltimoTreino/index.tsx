@@ -20,7 +20,6 @@ function UltimoTreino({ workoutData }: Props) {
         let cardios = workoutData.training.filter((treino:Workout)=> treino.type === 2)
         let musculacao = workoutData.training.filter((treino:Workout)=> treino.type === 1)
 
-        console.log(cardios, musculacao)
         setTreinosCardio(cardios)
         setTreinosMusculacao(musculacao)
 

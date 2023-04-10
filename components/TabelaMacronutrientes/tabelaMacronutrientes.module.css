@@ -1,0 +1,38 @@
+.macronutrientes{
+
+}
+
+
+.macronutrientes table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .macronutrientes th,
+  .macronutrientes td {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .macronutrientes td{
+    color: var(--primary-color-light);
+    font-size: .9rem;
+  }
+  
+  .macronutrientes th {
+    background-color: var(--primary-color-ultra-light);
+    color: var(--primary-color);
+  }
+
+  .macronutrientes tr:nth-child(even) {
+    background-color: var(--primary-color-ultra-light);
+  }
+
+  .macronutrientes .empty{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color-ultra-light);
+    text-align: center;
+  }

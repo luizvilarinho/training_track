@@ -17,7 +17,6 @@ async function loguedUser(request: NextApiRequest, response: NextApiResponse){
     let userId = await Auth(accsessToken);
     
     if(!userId || userId.error){
-        console.log("error",userId)
         response.status(401).json({success:false, message:'unauthorized'})
         return
     }

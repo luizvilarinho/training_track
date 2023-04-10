@@ -1,0 +1,10 @@
+.containerCalorias h2{
+    color: var(--primary-color-dark);
+    margin: 25px 15px;
+}
+
+.containerCalorias .flexSections{
+    display: flex;
+    align-items: stretch;
+   
+}

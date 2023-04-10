@@ -35,7 +35,6 @@ function PutHandler(props:Props){
             }).then(response=>{
                 response.json().then((data: any)=>{
                     setDados({...{data}, loading:false});
-                    console.log("DATA", data)
                 })
             })
 
