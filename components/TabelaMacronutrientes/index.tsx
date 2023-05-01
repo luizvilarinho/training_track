@@ -28,7 +28,7 @@ const TabelaMacronutrientes = (props:Props) => {
                         {props.alimentos && props.alimentos.map((item:Alimento, index:number)=>{
                             return (
                                 <tr key={index}>
-                                    <td>{item.alimento}</td>
+                                    <td>{item.alimento} <span className={styles.quantidadeTabela}>{`(${item.qnt} g)`}</span></td>
                                     <td>{Number(item.cal).toFixed(0)}</td>
                                     <td>{Number(item.p).toFixed(0)}</td>
                                     <td>{Number(item.c).toFixed(0)}</td>

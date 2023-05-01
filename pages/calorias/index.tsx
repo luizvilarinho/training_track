@@ -1,34 +1,121 @@
-import { useEffect } from "react"
+import React, {Fragment, useEffect, useState} from "react"
 import useGet from "../../components/hooks/useGet";
 import Refeicao from "../../components/Refeicao";
 import styles from "./containerCalorias.module.css"
 
 const Calorias = () => {
 
-    const [alimentos, getCall] = useGet({url: `${process.env.NEXT_PUBLIC_URL_CALORIAS}`});
+    const [dia, setDia] = useState<string>("");
+    const [alimentos, getCall] = useGet({url: `${process.env.NEXT_PUBLIC_REFEICAO}?data=${toBrLocaleDate(dia)}`});
+
+    const [alimentosList, getAlimentosListCall] = useGet({url: `${process.env.NEXT_PUBLIC_URL_CALORIAS}`});
+
+    const [tiposRefeicaoList, getTiposRefeicao] = useGet({url: `${process.env.NEXT_PUBLIC_REFEICAO}/tipo`});
+
 
     useEffect(()=>{
+        setDia(toEUALocaleDate(new Date().toLocaleDateString()))
+        getAlimentosListCall();
+        getTiposRefeicao();
+    }, []);
+
+    useEffect(()=>{
+
+        if(dia){
+            getCall();
+
+        }
+    }, [dia])
+
+    function alimentosRender(){
         getCall();
-    }, [])
-    
+    }
+
+    function obterRefeicoesDia($event:any){
+        setDia($event.currentTarget.value);
+        //getCall();
+    }
+
+    // @ts-ignore
     return (
-        <div className={styles.containerCalorias}>
-            <div>
-                <h2>Contador de calorias</h2>
-            </div>
+        <>
+            { alimentos.loading ? (
+                <Fragment>
+                    <div className="loading">
+                        <div className="loading-ico">
+                            <FontAwesomeIcon icon={faSpinner} />
+                        </div>
+                    </div>
+                </Fragment>
+            ) : (
+                <div className={styles.containerCalorias}>
 
-            <div className={styles.flexSections}>
-                <Refeicao alimentosList={alimentos.data} nomeRefeicao="Café da manhã" />
-                <Refeicao alimentosList={alimentos.data} nomeRefeicao="Almoço" />
-            </div>
-            <div className={styles.flexSections}>
-                <Refeicao alimentosList={alimentos.data} nomeRefeicao="café da tarde" />
-                <Refeicao alimentosList={alimentos.data} nomeRefeicao="Jantar" />
-            </div>
+                    <div>
+                        <h2>Contador de calorias</h2>
+                    </div>
+                    <div className={ `${styles.data} md-mar--top`}>
+                        <label htmlFor={'dataRef'}>Dia :</label>
+                        <input type={'date'} id={'dataRef'} value={dia} onChange={(e)=>obterRefeicoesDia(e)}/>
+                    </div>
+                    <div className={styles.totalMacroContainer}>
+                        <div className={styles.mobilleHidden}>Total <span>:</span></div>
+                        <div>CAL <span>{alimentos.data.reduce((a:any,b:any)=>a + b['cal'], 0)}</span>
+                        </div>
+                        <div>P <span>{alimentos.data.reduce((a: any, b: any) => a + b.p, 0)}</span></div>
+                        <div>C <span>{alimentos.data.reduce((a: any, b: any) => a + b.c, 0)}</span></div>
+                        <div>G <span>{alimentos.data.reduce((a: any, b: any) => a + b.g, 0)}</span></div>
+                        <div>F <span>{alimentos.data.reduce((a: any, b: any) => a + b.f, 0)}</span></div>
+                    </div>
 
-        </div>
-    )
-    
+                    <div className={styles.flexSections}>
+
+                        {tiposRefeicaoList.loading === false && alimentosList.loading === false? (
+
+                            tiposRefeicaoList.data.map((tipoRefeicao:any)=>{
+                                    return (
+                                        <Refeicao
+                                            key={tipoRefeicao.id}
+                                            idTipoRefeicao={tipoRefeicao.id}
+                                            alimentosList={alimentosList.data}
+                                            alimentosRefeicao={alimentos.data.filter((item:Alimento) => item.tipo && item.tipo.id === tipoRefeicao.id)}
+                                            nomeRefeicao={tipoRefeicao.tipo} dia={toBrLocaleDate(dia)}
+                                            alimentosRender={alimentosRender}
+                                        />
+                                    )
+                            })
+                        ) : ('...')}
+
+                    </div>
+
+
+                    <div className={'md-mar--top align--center'}>
+                        <Link href={'/'}>
+                            <button className={'secundary-btn'}>
+                         <span style={{marginRight:'5px'}}>
+                            <FontAwesomeIcon icon={faCircleArrowLeft} />
+                         </span>
+                                voltar
+                            </button>
+                        </Link>
+                        <button className={'secundary-btn md-mar--left'}>
+                            adicionar alimento
+                        </button>
+                    </div>
+                </div>
+            )}
+
+        </>
+
+
+)
+
 }
+
+import Link from "next/link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleArrowLeft, faSpinner} from "@fortawesome/free-solid-svg-icons";
+import {toBrLocaleDate, toEUALocaleDate} from "../../utils/parseDate";
+import {Alimento} from "./types";
+import {tipoRefeicao} from "../../components/Refeicao/types";
 
 export default Calorias;

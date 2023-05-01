@@ -3,6 +3,12 @@
 }
 
 
+.macronutrientes .quantidadeTabela{
+  color: seagreen;
+  opacity: .6;
+  font-size: .8rem;
+}
+
 .macronutrientes table {
     border-collapse: collapse;
     width: 100%;

@@ -1,10 +1,61 @@
-.containerCalorias h2{
-    color: var(--primary-color-dark);
-    margin: 25px 15px;
+.containerCalorias{
+    margin:0 25px;
 }
 
+.containerCalorias h2{
+    color: var(--primary-color-dark);
+    margin: 25px 0px 0px 0px;
+}
+
+.containerCalorias input[type='date']{
+    min-width: 20%;
+    margin-left: 1rem;
+}
 .containerCalorias .flexSections{
     display: flex;
     align-items: stretch;
-   
+    gap:20px;
+    flex-wrap: wrap;
+}
+.containerCalorias .flexSections > * {
+    flex-basis: 33%;
+}
+
+.containerCalorias .totalMacroContainer{
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-color-light);
+    width: 30%;
+    margin: 25px 0px 15px 0;
+}
+.containerCalorias span{
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .containerCalorias{
+        margin: 0px 10px;
+    }
+    .containerCalorias h2 {
+        text-align: center;
+    }
+    .containerCalorias .data{
+        text-align: center;
+    }
+    .containerCalorias .data input[type='date']{
+        width: 80%;
+    }
+    .containerCalorias .totalMacroContainer{
+        width: 100%;
+        margin: 25px 0px;
+        font-size: 1.2rem;
+    }
+    .containerCalorias .mobilleHidden{
+        display: none;
+    }
+    .containerCalorias .flexSections{
+        display: unset;
+    }
 }

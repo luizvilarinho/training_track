@@ -14,9 +14,8 @@ function Semana(props:Props) {
     },[props.diasArray])
     return (
         <article>
-                <div className="gr">
+                <div className="grid-semana">
                     <span>{ props.label }</span> 
-                    <div className="dias-container">
                         {props.diasArray.map((diaTreino:{dia:number, workoutId:number}, idx:number)=>{
                             let diaClass = diaTreino.dia === 0? 'dia off' : 'dia';
                             diaClass += diaTreino.workoutId != 0? ' worked' : ''
@@ -24,7 +23,6 @@ function Semana(props:Props) {
                         })}
                        
                     </div>
-                </div>
             </article>
     )
 }

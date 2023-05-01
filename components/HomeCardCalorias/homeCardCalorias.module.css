@@ -1,0 +1,49 @@
+.homeCardCalorias{
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    width: 100%;
+    overflow: hidden;
+    padding-bottom:25px;
+}
+.homeCardCalorias table{
+    width: 100%;
+
+}
+.homeCardCalorias th.none{
+    background-color: #f6f2fb;
+    border-bottom: unset;
+}
+.homeCardCalorias th{
+    color: var(--primary-color);
+    /*border-bottom: 1px solid #c2adff;*/
+    /*background-color: var(--primary-color-light);*/
+    border-radius: 2px;
+    width: 16.666%;
+    padding:8px;
+}
+.homeCardCalorias th span{
+    margin:0 auto;
+    display: block;
+    width: 80%;
+    border-bottom: 1px solid #c2adff;
+}
+.homeCardCalorias td{
+   text-align: center;
+    font-weight: 700;
+    color: var(--primary-color-light);
+}
+.homeCardCalorias .values{
+    color: var(--primary-color)
+}
+
+.homeCardCalorias button{
+    margin: 0 auto;
+    padding: 15px;
+    margin:25px 25px 5px 25px;
+}
+
+.homeCardCalorias .btnContainer{
+    margin-top:15px;
+    text-align: center;
+    /*border-top: 1px dashed #c2adff;*/
+}

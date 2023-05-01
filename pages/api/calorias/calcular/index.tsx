@@ -13,7 +13,7 @@ export default async function calcularCalorias(
     switch(req.method){
         case 'POST':
             console.log(req.body)
-            let response = await fetch('http://localhost:8000/api/calcular', {
+            let response = await fetch(`${process.env.API_CALORIAS}/api/calcular`, {
                 'method': 'POST',
                 'headers':{
                     "Content-type": "application/json"

@@ -10,9 +10,10 @@ export default async function caloriasAPI(
   res: NextApiResponse<Data>
 ) {
 
+  console.log("PROCESSENV",process.env.API_CALORIAS)
   switch(req.method){
     case 'GET':
-      let response = await fetch('http://localhost:8000/api')
+      let response = await fetch(`${process.env.API_CALORIAS}/api/`)
   
       let respJson =  await response.json()
   

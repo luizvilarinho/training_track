@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {router.pathname != '/login' && router.pathname != '/novo-usuario' ? (
         <Fragment>
           <HeaderComponent name={userData.data[0]?.name}/>
-          <MenuComponent/>
+          {/*<MenuComponent/>*/}
         </Fragment>
 
       ) : ( <></> )}

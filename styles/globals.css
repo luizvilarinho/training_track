@@ -86,6 +86,9 @@ h3{
   display: inline-block;
   margin-left: 10px;
 }
+.logout{
+  cursor: pointer;
+}
 
 #top-alert img{
   vertical-align: middle;
@@ -206,9 +209,8 @@ select{
 }
 .dia{
   border: 1px solid var(--primary-color-light);
-  width: 30px;
-  height: 30px;
-  margin-left: 11px;
+  min-height: 30px;
+  margin-left: 10px;
 }
 .dia.off{
   border: 1px solid var(--bg-color-light);
@@ -259,6 +261,7 @@ select{
 }
 .flex-container{
   display: flex;
+  justify-content: space-evenly;
 }
 .space-between{
   justify-content: space-between;
@@ -354,6 +357,10 @@ button{
   font-size: 1rem;
   border-radius: 4px;
   z-index: 199;
+  cursor: pointer;
+}
+button:hover{
+  border-color: blueviolet;
 }
 button:active{
   box-shadow: 4px 4px 3px #4c358f inset ;

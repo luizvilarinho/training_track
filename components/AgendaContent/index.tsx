@@ -23,7 +23,7 @@ type IdiasArray = {
 function AgendaContent({ workouts }:Props) {
 
     const [mes, setMes] = useState<string>('01');
-    const [ano, setAno] = useState<string>('2022');
+    const [ano, setAno] = useState<string>(String(new Date().getFullYear()));
 
     const monthArray: Array<Idia> = [
         { name: 'Janeiro', value: '01' },
@@ -138,7 +138,7 @@ function AgendaContent({ workouts }:Props) {
                     {monthArray.map((item, idx) => <option key={idx} value={item.value}>{item.name}</option>)}
                 </select>
                 <select id="ano-select" onChange={void (0)}>
-                    <option value="2022">2022</option>
+                    <option value="{ano}">{ano}</option>
                 </select>
             </div>
             <article>

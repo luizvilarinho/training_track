@@ -11,32 +11,56 @@ datasource db {
 }
 
 model tb_user {
-  id         Int          @id @default(autoincrement())
-  email      String       @unique
-  name       String
-  password   String
-  tb_workout tb_workout[]
+  id            Int           @id @default(autoincrement())
+  email          String        @unique
+  name          String
+  password      String
+  tb_workout    tb_workout[]
+  alimentos     tb_alimento[]
 }
 
 model tb_workout {
   id           Int        @id @default(autoincrement())
   user         tb_user    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int        
+  userId       Int
   training     tb_group[]
   lastTraining Boolean
   date         DateTime
 }
 
 model tb_group {
-  id           Int           @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   type         Int
   description  String
   sets         Int
-  tb_workout   tb_workout?   @relation(fields: [tb_workoutId], references: [id], onDelete: Cascade)
+  tb_workout   tb_workout? @relation(fields: [tb_workoutId], references: [id], onDelete: Cascade)
   tb_workoutId Int
 }
 
 model tb_group_type {
-  id          Int        @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   description String
 }
+
+model tb_tipo_refeicao {
+  id          Int           @id @default(autoincrement())
+  tipo        String
+  tb_alimento tb_alimento[]
+}
+
+model tb_alimento {
+  id            Int                     @id @default(autoincrement())
+  tipo          tb_tipo_refeicao        @relation(fields: [tipoId], references: [id])
+  user          tb_user                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int
+  tipoId        Int
+  date          DateTime
+  nome          String
+  qnt           Decimal
+  cal           Int
+  p             Int
+  c             Int
+  g             Int
+  f             Int
+}
+
