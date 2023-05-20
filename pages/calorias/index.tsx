@@ -2,6 +2,11 @@ import React, {Fragment, useCallback, useEffect, useMemo, useState} from "react"
 import useGet from "../../components/hooks/useGet";
 import Refeicao from "../../components/Refeicao";
 import styles from "./containerCalorias.module.css"
+import Link from "next/link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleArrowLeft, faSpinner} from "@fortawesome/free-solid-svg-icons";
+import {toBrLocaleDate, toEUALocaleDate} from "../../utils/parseDate";
+import {Alimento} from "../../components/types";
 
 const Calorias = () => {
 
@@ -119,12 +124,5 @@ const Calorias = () => {
 )
 
 }
-
-import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleArrowLeft, faSpinner} from "@fortawesome/free-solid-svg-icons";
-import {toBrLocaleDate, toEUALocaleDate} from "../../utils/parseDate";
-import {Alimento} from "./types";
-import {tipoRefeicao} from "../../components/Refeicao/types";
 
 export default Calorias;

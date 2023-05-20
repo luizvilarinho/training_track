@@ -1,10 +1,9 @@
 import TabelaMacronutrientes from "../TabelaMacronutrientes";
 import { useEffect, useState } from "react";
-import { Alimento } from "../../pages/calorias/types";
+import { Alimento } from "../../components/types";
 import styles from  "./calorias.module.css"
 import usePost from "../hooks/usePost";
 import {tipoRefeicao} from "./types";
-import useGet from "../hooks/useGet";
 
 type Props = {
     alimentosList:Array<Alimento>,

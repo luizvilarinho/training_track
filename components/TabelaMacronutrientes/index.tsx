@@ -1,7 +1,7 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./tabelaMacronutrientes.module.css"
-import { Alimento } from "../../pages/calorias/types";
+import { Alimento } from "../types";
 import { Modal } from "../Modal";
 import { useEffect, useState } from "react";
 import useDelete from "../hooks/useDelete";
