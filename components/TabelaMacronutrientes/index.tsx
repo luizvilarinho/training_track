@@ -46,7 +46,7 @@ const TabelaMacronutrientes = (props:Props) => {
             console.log("deleteDados", deleteDados.data)
             props.fetchAlimentos();
         }
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleteDados])
 
     return (

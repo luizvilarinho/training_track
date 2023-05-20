@@ -98,7 +98,6 @@ const Refeicao = (props: Props) => {
             setAlimentosTable(props.alimentosRefeicao)
         }
 
-        //props.alimentosRender();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.alimentosRefeicao])
 
@@ -120,7 +119,6 @@ const Refeicao = (props: Props) => {
 
         
         
-        //httpPostAlimento()
     }
 
     useEffect(()=>{
@@ -128,6 +126,7 @@ const Refeicao = (props: Props) => {
         if(payloadAlimento.nome != ""){
             httpPostAlimento()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [payloadAlimento])
     
 
@@ -137,8 +136,8 @@ const Refeicao = (props: Props) => {
             setAlimentoForm(INICIAL_FORM);
             props.fetchAlimentos();
         }
-        //props.fetchAlimentos();
-        //fetchAlimentos();
+    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [alimentoSaved])
 
 
