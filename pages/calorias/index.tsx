@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react"
+import React, {Fragment, useCallback, useEffect, useMemo, useState} from "react"
 import useGet from "../../components/hooks/useGet";
 import Refeicao from "../../components/Refeicao";
 import styles from "./containerCalorias.module.css"
@@ -17,23 +17,30 @@ const Calorias = () => {
         setDia(toEUALocaleDate(new Date().toLocaleDateString()))
         getAlimentosListCall();
         getTiposRefeicao();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(()=>{
 
         if(dia){
             getCall();
-
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dia])
 
-    function alimentosRender(){
-        getCall();
-    }
+    // const alimentosRender = ()=>{
+    //     if(dia){
+    //         getCall();
+    //     }
+    // };
 
     function obterRefeicoesDia($event:any){
         setDia($event.currentTarget.value);
         //getCall();
+    }
+
+    function calcularCaloriasTotais(){
+        getCall();
     }
 
     // @ts-ignore
@@ -78,8 +85,10 @@ const Calorias = () => {
                                             idTipoRefeicao={tipoRefeicao.id}
                                             alimentosList={alimentosList.data}
                                             alimentosRefeicao={alimentos.data.filter((item:Alimento) => item.tipo && item.tipo.id === tipoRefeicao.id)}
-                                            nomeRefeicao={tipoRefeicao.tipo} dia={toBrLocaleDate(dia)}
-                                            alimentosRender={alimentosRender}
+                                            nomeRefeicao={tipoRefeicao.tipo}
+                                            dia={toBrLocaleDate(dia)}
+                                            fetchAlimentos={calcularCaloriasTotais}
+                                            // alimentosRender={alimentosRender}
                                         />
                                     )
                             })

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Alimento } from "../../pages/calorias/types";
 import styles from  "./calorias.module.css"
 import usePost from "../hooks/usePost";
-import Link from "next/link";
 import {tipoRefeicao} from "./types";
+import useGet from "../hooks/useGet";
 
 type Props = {
     alimentosList:Array<Alimento>,
@@ -12,7 +12,8 @@ type Props = {
     nomeRefeicao: tipoRefeicao,
     dia:string,
     idTipoRefeicao: number,
-    alimentosRender:Function
+    fetchAlimentos: () => void
+    // alimentosRender:Function
 }
 
 type FormAdd = {
@@ -27,6 +28,7 @@ const Refeicao = (props: Props) => {
         alimento: '',
         quantidade:'',
         selected: {
+            id:0,
             alimento: '',
             cal:0,
             p:0,
@@ -56,6 +58,7 @@ const Refeicao = (props: Props) => {
     const [payloadAlimento, setPayloadAlimento] = useState(payloadPostAlimentoInit);
     
     const [alimentoSaved, httpPostAlimento] = usePost({url: `${process.env.NEXT_PUBLIC_REFEICAO}`, payload: payloadAlimento});
+
 
     function alimentoHandler(event:any){
         if(event.target.value.length > 2){
@@ -94,7 +97,10 @@ const Refeicao = (props: Props) => {
             })
             setAlimentosTable(props.alimentosRefeicao)
         }
-    }, [])
+
+        //props.alimentosRender();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.alimentosRefeicao])
 
     async function adicionarAlimento(){
 
@@ -112,23 +118,29 @@ const Refeicao = (props: Props) => {
 
         setPayloadAlimento(payload)
 
-
+        
+        
         //httpPostAlimento()
     }
 
-    async function gravarRenderizarAlimentos(){
-        if(payloadAlimento.quantidade != null){
-            await httpPostAlimento()
-            setTimeout(()=>{
-                props.alimentosRender();
-            }, 500)
-        }
-    }
     useEffect(()=>{
+        
+        if(payloadAlimento.nome != ""){
+            httpPostAlimento()
+        }
+    }, [payloadAlimento])
+    
 
-        gravarRenderizarAlimentos()
+    useEffect(()=>{
+        if(Object.keys(alimentoSaved.data).length > 0){
+            //gravarRenderizarAlimentos()
+            setAlimentoForm(INICIAL_FORM);
+            props.fetchAlimentos();
+        }
+        //props.fetchAlimentos();
+        //fetchAlimentos();
+    }, [alimentoSaved])
 
-    },[payloadAlimento]);
 
     function somaMacronutrientes(macro:string):number{
         
@@ -202,7 +214,7 @@ const Refeicao = (props: Props) => {
                             </div>
                         ) : (null)}
                     </div>
-                    <TabelaMacronutrientes  alimentos={alimentosTable} />
+                    <TabelaMacronutrientes  alimentos={alimentosTable} fetchAlimentos={props.fetchAlimentos} />
                 </div>
             </section>
 

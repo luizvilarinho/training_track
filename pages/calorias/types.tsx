@@ -1,5 +1,5 @@
 export type Alimento= {
-    id?:number
+    id:number
     alimento:string
     cal:number
     p:number

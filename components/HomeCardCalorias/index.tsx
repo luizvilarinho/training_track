@@ -41,7 +41,7 @@ const HomeCardCalorias:  React.FC<Props> = (props: Props) => {
             </table>
 
             <div className={`${styles.btnContainer} align--center`}>
-                <Link href={'/calorias'}>
+                <Link href={'/calorias'} passHref>
                     <button>adicionar</button>
                 </Link>
             </div>

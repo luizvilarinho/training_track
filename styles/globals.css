@@ -421,5 +421,8 @@ div.hide > h1{
   width: 20%;
   padding: 15px;
 }
+.pointer{
+  cursor: pointer;
+}
 
 

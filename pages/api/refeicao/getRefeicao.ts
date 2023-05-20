@@ -4,13 +4,13 @@ import {alimentoType} from "./types";
 export async function getRefeicaoByDate(prisma: PrismaClient, date:string, userId:number){
     try{
         let [d,m,y] = date.split('/')
-        console.log(new Date(`${y}-0${m}-${d}`))
         let refeicoes: Array<alimentoType> = await prisma.tb_alimento.findMany({
             where: {
                 userId: userId,
                 date: new Date(`${y}-0${m}-${d}`)
             },
             select: {
+                id:true,
                 nome: true,
                 qnt:true,
                 cal: true,

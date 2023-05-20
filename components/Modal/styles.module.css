@@ -1,0 +1,38 @@
+.modalContainer{
+   background-color: rgba(170, 150, 224, 0.8);
+   position: absolute;
+   width: 100vw;
+   height: 100vh;
+   top: 0;
+   left: 0;
+   z-index: 15;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.modalContainer .modalContent{
+    width: 30%;
+    height: 30%;
+    background-color: var(--primary-color-ultra-light);
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer .btnContaner{
+    margin-top: 3rem;
+}
+.modalContainer .btnContaner button{
+    margin: 0 15px;
+    width: 30%;
+}
+
+@media screen and (max-width: 1000px) {
+    .modalContainer .modalContent{
+        width: 90%;
+        height: 30%;
+    }
+}

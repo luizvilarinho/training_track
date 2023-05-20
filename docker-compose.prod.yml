@@ -1,0 +1,32 @@
+version: '3'
+services:
+  training_web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '3010:3005'
+    volumes:
+      - './:/app'
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://postgres:vila@02100260@training_db/training_track?schema=public
+    depends_on:
+      - training_db
+    command: npm start
+
+  training_db:
+    image: postgres
+    volumes:
+      - ./training_track.sql:/docker-entrypoint-initdb.d/training_track.sql
+      - training_db:/data/training_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vila@02100260
+      POSTGRES_DB: training_track
+    ports:
+      - '5435:5432'
+    restart: unless-stopped
+
+volumes:
+  training_db:
