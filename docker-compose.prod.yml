@@ -5,15 +5,16 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     ports:
-      - '3010:3005'
+      - '3005:3005'
     volumes:
       - './:/app'
+      - '/app/node_modules'
     environment:
       NODE_ENV: production
       DATABASE_URL: postgres://postgres:vila@02100260@training_db/training_track?schema=public
+    command: npm run start:build
     depends_on:
       - training_db
-    command: npm start
 
   training_db:
     image: postgres

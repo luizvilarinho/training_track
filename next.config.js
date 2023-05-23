@@ -1,17 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  reactStrictMode: true,
-  
-  // async redirects() {
-  //   request
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/login',
-  //       permanent: false,
-  //     },
-  //   ]
-  // },
+  // assetPrefix: 'http://vilaweb.link/training',
+  basePath: '/training',
+  assetPrefix: '/training/'
 }
 
 module.exports = nextConfig
