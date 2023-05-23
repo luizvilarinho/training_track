@@ -290,7 +290,7 @@ function AdicionarTreino(props: Props) {
                             <div className="align-right">series</div>
                         </article>
                         <article className="combo-add-treino">
-                            <div>deltóife</div>
+                            <div>ombro</div>
                             <div className="add-serie-container">
                                 <div onClick={()=>setDeltoide(validation({...deltoide, sets:deltoide.sets - 1}))}><FontAwesomeIcon icon={faCircleMinus} /></div>
                                 <div>{deltoide.sets}</div>

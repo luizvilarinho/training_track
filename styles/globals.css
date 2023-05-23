@@ -325,6 +325,7 @@ section#last-section{
  justify-content: space-around;
  width: 150px;
  z-index: 2;
+ margin: 0 auto;
 }
 .combo-add-cardio .add-serie-container{
   justify-content: space-between;

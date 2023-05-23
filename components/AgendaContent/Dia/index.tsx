@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 
 type Props = {
     day:string
@@ -40,15 +41,19 @@ function Dia(props: Props) {
     }
     return (
         <>
-            <div className={`${props.className} ${workedClass}` } data-dia={props.day} onClick={()=>{
-                // workedClass === 'worked' ? setWorkedClass('') : setWorkedClass('worked')
-                router.push({
-                    pathname: 'treino',
-                    query: { workoutid: props.workoutId, calendar:`${String(props.day).length == 1 ? '0'+String(props.day): String(props.day)}/${props.mes}/${year}` }
-                })
-            }}>
-                <div className={`number-day ${findToday()}`}>{props.day != '0' ? props.day : ''}</div>
-                </div>
+            <div className={`${props.className} ${workedClass} pointer` } data-dia={props.day} 
+            // onClick={()=>{
+            //     // workedClass === 'worked' ? setWorkedClass('') : setWorkedClass('worked')
+            //     router.push({
+            //         pathname: 'treino',
+            //         query: { workoutid: props.workoutId, calendar:`${String(props.day).length == 1 ? '0'+String(props.day): String(props.day)}/${props.mes}/${year}` }
+            //     })
+            // }}
+            >
+                <Link href={`./treino?workoutid=${props.workoutId}&calendar=${String(props.day).length == 1 ? '0'+String(props.day): String(props.day)}/${props.mes}/${year}`}>
+                    <div className={`number-day ${findToday()}`}>{props.day != '0' ? props.day : ''}</div>
+                </Link>
+            </div>
         </>
     );
 }

@@ -3,7 +3,6 @@ import '../styles/loading.css'
 import type { AppProps } from 'next/app'
 import { Fragment, useEffect } from 'react'
 import HeaderComponent from '../components/HeaderComponent'
-import MenuComponent from '../components/MenuComponent'
 import useGet from '../components/hooks/useGet'
 import { useRouter } from 'next/router'
 
