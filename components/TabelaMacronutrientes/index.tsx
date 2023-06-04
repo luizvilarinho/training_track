@@ -28,6 +28,7 @@ const TabelaMacronutrientes = (props:Props) => {
     const [deleteDados, deleteCall] = useDelete({url: `${process.env.NEXT_PUBLIC_REFEICAO}/${modalConfig.itemSelectedId}`});
    
     function openModalDelete(id:number){
+        window.scrollTo({left:0, top:0});
         setModalConfig({...modalConfig, itemSelectedId:id,open:true, })
     }
 
