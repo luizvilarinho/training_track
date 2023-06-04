@@ -58,13 +58,16 @@ const Refeicao = (props: Props) => {
     
     const [alimentoSaved, httpPostAlimento] = usePost({url: `${process.env.NEXT_PUBLIC_REFEICAO}`, payload: payloadAlimento});
 
-
+    //gera alista de alimentos para exibição
     function alimentoHandler(event:any){
+        
         if(event.target.value.length > 2){
             let alimentosFiltered = props.alimentosList.filter((item:Alimento) => {
-                return item.alimento.toUpperCase().includes(event.target.value.toUpperCase())
+                let nomeAlimento = item.alimento.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                let alimentoPesquisado = event.target.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                return nomeAlimento.includes(alimentoPesquisado)
             })
-
+            console.log(alimentosFiltered)
             setAlimentosToSelect(alimentosFiltered)
         }else{
             setAlimentosToSelect([])
@@ -160,6 +163,7 @@ const Refeicao = (props: Props) => {
             <section className={styles.sectionMacros}>
                 <div className={styles.sectionInput}>
                     <article className={styles.containerAlimento}>
+                        <h3>{props.nomeRefeicao} </h3>
                         <label htmlFor="alimento">alimento</label>
                         <input type='text' 
                             id="alimento" 
@@ -170,7 +174,7 @@ const Refeicao = (props: Props) => {
                             autoComplete="off"
                         />
 
-                        <div className={`${styles.selectContainer} ${alimentosToSelect.length > 0 && alimentoForm.alimento.length > 3? styles.open : styles.close}`}>
+                        <div className={`${styles.selectContainer} ${alimentosToSelect.length > 0 && alimentoForm.alimento.length > 2? styles.open : styles.close}`}>
                             {
                                 alimentosToSelect.map((item:Alimento)=>{
                                     return (
@@ -196,9 +200,9 @@ const Refeicao = (props: Props) => {
                     <button onClick={()=>adicionarAlimento()} disabled={alimentoForm.alimento && alimentoForm.quantidade? false : true}>adicionar</button>
                 </div>
 
-                <div>
+                <div className="md-mar--bottom">
                     <div className={styles.tituloContainer}>
-                        <h3>{props.nomeRefeicao} </h3>
+                       
                         
                         {alimentosTable.length > 0 ? (
                             <div className={styles.totalMacroContainer}>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -9,6 +10,14 @@ type Props = {
 
 export const Modal = (props:Props) =>{
 
+    useEffect(()=>{
+        console.log("MODAL", props.open)
+        if(props.open){
+            document.body.style.overflow = 'hidden';
+        }else{
+            document.body.style.overflow = '';
+        }
+    }, [props.open])
     return (
         <>  
             {props.open && (
@@ -17,8 +26,8 @@ export const Modal = (props:Props) =>{
                         <div>
                             <h1>{props.title}</h1>
                             <div className={styles.btnContaner}>
-                                <button className="secundary-btn" onClick={props.exec}>Sim</button>
-                                <button onClick={props.closeModal}>Não</button>
+                                <button  onClick={props.exec}>Sim</button>
+                                <button className="secundary-btn" onClick={props.closeModal}>Cancelar</button>
                             </div>
                         </div>
                     </div>
