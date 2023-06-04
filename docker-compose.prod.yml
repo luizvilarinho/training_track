@@ -13,6 +13,7 @@ services:
       NODE_ENV: production
       DATABASE_URL: postgres://postgres:vila@02100260@training_db/training_track?schema=public
     command: npm run start:build
+    restart: always
     depends_on:
       - training_db
 
@@ -27,7 +28,7 @@ services:
       POSTGRES_DB: training_track
     ports:
       - '5435:5432'
-    restart: unless-stopped
+    restart: always
 
 volumes:
   training_db:

@@ -50,7 +50,7 @@ function Dia(props: Props) {
             //     })
             // }}
             >
-                <Link href={`./treino?workoutid=${props.workoutId}&calendar=${String(props.day).length == 1 ? '0'+String(props.day): String(props.day)}/${props.mes}/${year}`}>
+                <Link href={`/treino?workoutid=${props.workoutId}&calendar=${String(props.day).length == 1 ? '0'+String(props.day): String(props.day)}/${props.mes}/${year}`}>
                     <div className={`number-day ${findToday()}`}>{props.day != '0' ? props.day : ''}</div>
                 </Link>
             </div>
