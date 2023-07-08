@@ -47,3 +47,27 @@
     text-align: center;
     /*border-top: 1px dashed #c2adff;*/
 }
+.homeCardCalorias .resumoCalorias{
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+   justify-content: center;
+}
+.homeCardCalorias .resumoCalorias div{
+   margin: 0 20px;
+   
+}
+.homeCardCalorias .resumoCalorias small{
+    color: #c2adff;
+}
+.homeCardCalorias .resumoCalorias span{
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .homeCardCalorias .resumoCalorias{
+        justify-content: space-between;
+    }
+  
+  }
+

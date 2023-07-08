@@ -76,18 +76,33 @@ h3{
   width: 18%;
 }
 .menu{
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   text-align: left;
   vertical-align: middle;
-  width: 80%;
+  width: 60%;
+  margin: 0 auto;
   color: var(--bg-color-light);
 }
 .user, .logout{
-  display: inline-block;
   margin-left: 10px;
 }
 .logout{
   cursor: pointer;
+}
+
+.logo{
+  font-weight: 600;
+  color: #c3b7ec;
+}
+
+.version{
+  width: 60%;
+  margin: 0 auto;
+  font-size: 0.7rem;
+  color: #a894df;
+  padding:10px 0 20px 20px;
 }
 
 #top-alert img{
@@ -425,6 +440,18 @@ div.hide > h1{
 .pointer{
   cursor: pointer;
 }
+.tomato{
+  color:tomato;
+  opacity: .7;
+}
+.green{
+  color: rgb(97, 191, 97);
+}
 
 
+@media (max-width: 600px) {
+  .menu, .version {
+    width: 100%;
+  }
 
+}

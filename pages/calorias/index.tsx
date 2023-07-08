@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleArrowLeft, faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {toBrLocaleDate, toEUALocaleDate} from "../../utils/parseDate";
 import {Alimento} from "../../components/types";
+import HeaderComponent from "../../components/HeaderComponent";
 
 const Calorias = () => {
 
@@ -51,6 +52,9 @@ const Calorias = () => {
     // @ts-ignore
     return (
         <>
+            <div>
+                <HeaderComponent userData={""}/>
+            </div>
             { alimentos.loading ? (
                 <Fragment>
                     <div className="loading">
