@@ -107,7 +107,7 @@ const Calorias = () => {
 
 
                     <div className={'md-mar--top align--center'}>
-                        <Link href={'/'}>
+                        <Link href={'/'} passHref>
                             <button className={'secundary-btn'}>
                          <span style={{marginRight:'5px'}}>
                             <FontAwesomeIcon icon={faCircleArrowLeft} />

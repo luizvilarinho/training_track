@@ -1,23 +1,23 @@
-interface UserData {
+export interface UserData {
     name:string
     email:string
     health_data: HealthData
 }
 
-interface HealthData {
+export interface HealthData {
     height: number
     meta_calorias:number
     weight: number
     meta_macros: MacrosBasicos
 }
 
-interface MacrosBasicos{
+export interface MacrosBasicos{
     p:number
     c: number
     g:number
 }
 
-interface DistribuicaoMacros{
+export interface DistribuicaoMacros{
     calorias: number
     p:{
         qnt:number

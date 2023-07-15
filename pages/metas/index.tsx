@@ -6,6 +6,7 @@ import calcularDistribuicaoMacros from "./calcularDistribuicaoMacros";
 import usePost from "../../components/hooks/usePost";
 import Alert from "../../components/Alert";
 import useAlert from "../../components/hooks/useAlert";
+import { DistribuicaoMacros, UserData } from "./types";
 
 const Metas = () => {
     const [postHealthData, postHealthDataCall] = usePost({url: process.env.NEXT_PUBLIC_HEALTH_DATA, payload: null});
@@ -41,7 +42,8 @@ const Metas = () => {
         let newDataMacros = calcularDistribuicaoMacros(distMacros)
         setDistribuicaoMacros(newDataMacros)
     }
-
+    
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [userData.health_data?.meta_calorias])
 
     function changeDataHandler(value:string, field:string){

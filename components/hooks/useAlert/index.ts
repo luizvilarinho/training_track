@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function alertHandler() : [boolean, ()=>void]{
+function AlertHandler() : [boolean, ()=>void]{
 
     const [show, setShow] = useState<boolean>(false);
     const duration = 2000;
@@ -28,4 +28,4 @@ function alertHandler() : [boolean, ()=>void]{
     return [show, alertShowHide]
 }
 
-export default alertHandler;
+export default AlertHandler;
