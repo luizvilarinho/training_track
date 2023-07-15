@@ -37,7 +37,7 @@ const HeaderComponent = ({userData}:any) =>{
                     </Link>
                    
                 </div>
-                <div className="user">{userData.name}</div>
+                <div className="user">{userData?.name}</div>
                 <div className="logout" onClick={logoutHandler}>logout</div>
             </div>
             {/* <div className="notification-length">1</div> */}

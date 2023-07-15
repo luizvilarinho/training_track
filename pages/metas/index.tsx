@@ -1,135 +1,192 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import HeaderComponent from "../../components/HeaderComponent";
-import styles from './Metas.module.css';
-import calcularDistribuicaoMacros from "./calcularDistribuicaoMacros";
+import styles from "../../components/metas/Metas.module.css"
+import calcularDistribuicaoMacros from "../../components/metas/calcularDistribuicaoMacros"
 import usePost from "../../components/hooks/usePost";
 import Alert from "../../components/Alert";
 import useAlert from "../../components/hooks/useAlert";
-import { DistribuicaoMacros, UserData } from "./types";
+
+interface UserData {
+    name:string
+    email:string
+    health_data: HealthData
+}
+
+interface HealthData {
+    height: number
+    meta_calorias:number
+    weight: number
+    meta_macros: MacrosBasicos
+}
+
+interface MacrosBasicos{
+    p:number
+    c: number
+    g:number
+}
+
+interface DistribuicaoMacros{
+    calorias: number
+    p:{
+        qnt:number
+        porcentagem:number
+    }
+    c:{
+        qnt:number
+        porcentagem:number
+    }
+    g:{
+        qnt:number
+        porcentagem:number
+    }
+}
+
+interface InitialUserData {
+    name: string;
+    email: string;
+    health_data: HealthData | null;
+  }
 
 const Metas = () => {
     const [postHealthData, postHealthDataCall] = usePost({url: process.env.NEXT_PUBLIC_HEALTH_DATA, payload: null});
     
-    let userDataStorage:UserData = JSON.parse(localStorage.getItem('TTDATA') || '');
+   useEffect(() => {
+    const userDataStorage = localStorage.getItem('TTDATA');
+    if (typeof userDataStorage === 'string') {
+      setUserData(JSON.parse(userDataStorage));
+    }
+  }, []);
 
-    const [userData, setUserData] = useState(userDataStorage);
+  const [userData, setUserData] = useState<InitialUserData | null>(null);
 
     const [show, alertShowHide] = useAlert();
 
     const [distribuicaoMacros, setDistribuicaoMacros] = useState<DistribuicaoMacros>({
-        calorias:userData.health_data?.meta_calorias,
-        p:{
-            qnt:userData.health_data?.meta_macros?.p,
-            porcentagem:0
+        calorias: userData?.health_data?.meta_calorias || 0,
+        p: {
+          qnt: userData?.health_data?.meta_macros?.p || 0,
+          porcentagem: 0
         },
-        c:{
-            qnt:userData.health_data?.meta_macros?.c,
-            porcentagem:0
+        c: {
+          qnt: userData?.health_data?.meta_macros?.c || 0,
+          porcentagem: 0
         },
-        g:{
-            qnt:userData.health_data?.meta_macros?.g,
-            porcentagem:0
+        g: {
+          qnt: userData?.health_data?.meta_macros?.g || 0,
+          porcentagem: 0
         }
-    })
+      });
 
     const [lock, setLock] = useState(true);
     const [lock2, setLock2] = useState(true);
     
    useEffect(()=>{
-    if(userData.health_data?.meta_calorias){
+    if(userData?.health_data?.meta_calorias){
         let distMacros:DistribuicaoMacros = {...distribuicaoMacros, calorias: userData.health_data?.meta_calorias}
         let newDataMacros = calcularDistribuicaoMacros(distMacros)
         setDistribuicaoMacros(newDataMacros)
     }
     
 // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [userData.health_data?.meta_calorias])
+}, [userData?.health_data?.meta_calorias])
 
     function changeDataHandler(value:string, field:string){
     let currentValue = parseInt(value, 10);
 
         switch(field){
             case 'altura':
-                if(currentValue < 0 || !currentValue){
-                    setUserData({...userData, health_data: {...userData.health_data, height: 0}})
-                    break;
-                }
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setUserData({...userData, health_data: {...userData.health_data, height: 0}})
+                        break;
+                    }
+    
+                    if(Number(value) >= 280){
+                        setUserData({...userData, health_data: {...userData.health_data, height: 280}})
+                    } else{
+                        setUserData({...userData, health_data: {...userData.health_data, height: currentValue}})
+                    }
+    
+                    setLock(false);
 
-                if(Number(value) >= 280){
-                    setUserData({...userData, health_data: {...userData.health_data, height: 280}})
-                } else{
-                    setUserData({...userData, health_data: {...userData.health_data, height: currentValue}})
                 }
-
-                setLock(false);
                 
                 break;
             case 'peso':
-                
-                if(currentValue < 0 || !currentValue){
-                    setUserData({...userData, health_data: {...userData.health_data, weight: 0}})
-                    break;
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setUserData({...userData, health_data: {...userData.health_data, weight: 0}})
+                        break;
+                    }
+    
+                    if(Number(value) >= 200){
+                        setUserData({...userData, health_data: {...userData.health_data, weight: 200}})
+                    } else{
+                        setUserData({...userData, health_data: {...userData.health_data, weight: currentValue}})
+                    }
+    
+                    setLock(false);
                 }
-
-                if(Number(value) >= 200){
-                    setUserData({...userData, health_data: {...userData.health_data, weight: 200}})
-                } else{
-                    setUserData({...userData, health_data: {...userData.health_data, weight: currentValue}})
-                }
-
-                setLock(false);
 
                 break;
 
             case 'calorias':
-                if(currentValue < 0 || !currentValue){
-                    setUserData({...userData, health_data: {...userData.health_data, meta_calorias: 0}})
-                    break;
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setUserData({...userData, health_data: {...userData.health_data, meta_calorias: 0}})
+                        break;
+                    }
+    
+                    if(Number(value) >= 10000){
+                        setUserData({...userData, health_data: {...userData.health_data, meta_calorias: 10000}})
+                    } else{
+                        setUserData({...userData, health_data: {...userData.health_data, meta_calorias: currentValue}})
+                    }
+    
+                    setLock2(false)
                 }
-
-                if(Number(value) >= 10000){
-                    setUserData({...userData, health_data: {...userData.health_data, meta_calorias: 10000}})
-                } else{
-                    setUserData({...userData, health_data: {...userData.health_data, meta_calorias: currentValue}})
-                }
-
-                setLock2(false)
 
 
                 break;
 
             case 'p':
-                if(currentValue < 0 || !currentValue){
-                    setDistribuicaoMacros({...distribuicaoMacros, p: {...distribuicaoMacros.p, qnt:0}})
-                    break;
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setDistribuicaoMacros({...distribuicaoMacros, p: {...distribuicaoMacros.p, qnt:0}})
+                        break;
+                    }
+    
+                    setDistribuicaoMacros({...distribuicaoMacros, p: {...distribuicaoMacros.p, qnt:currentValue}})
+                    calcularDistribuicaoMacrosHandler('p', currentValue)
+                    setLock2(false)
                 }
-
-                setDistribuicaoMacros({...distribuicaoMacros, p: {...distribuicaoMacros.p, qnt:currentValue}})
-                calcularDistribuicaoMacrosHandler('p', currentValue)
-                setLock2(false)
             break;
 
             case 'c':
-                if(currentValue < 0 || !currentValue){
-                    setDistribuicaoMacros({...distribuicaoMacros, c: {...distribuicaoMacros.c, qnt:0}})
-                    break;
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setDistribuicaoMacros({...distribuicaoMacros, c: {...distribuicaoMacros.c, qnt:0}})
+                        break;
+                    }
+    
+                    setDistribuicaoMacros({...distribuicaoMacros, c: {...distribuicaoMacros.c, qnt:currentValue}})
+                    calcularDistribuicaoMacrosHandler('c', currentValue)
+                    setLock2(false)
                 }
-
-                setDistribuicaoMacros({...distribuicaoMacros, c: {...distribuicaoMacros.c, qnt:currentValue}})
-                calcularDistribuicaoMacrosHandler('c', currentValue)
-                setLock2(false)
             break;
 
             case 'g':
-                if(currentValue < 0 || !currentValue){
-                    setDistribuicaoMacros({...distribuicaoMacros, g: {...distribuicaoMacros.g, qnt:0}})
-                    break;
+                if(userData?.health_data)  {
+                    if(currentValue < 0 || !currentValue){
+                        setDistribuicaoMacros({...distribuicaoMacros, g: {...distribuicaoMacros.g, qnt:0}})
+                        break;
+                    }
+    
+                    setDistribuicaoMacros({...distribuicaoMacros, g: {...distribuicaoMacros.g, qnt:currentValue}})
+                    calcularDistribuicaoMacrosHandler('g', currentValue)
+                    setLock2(false)
                 }
-
-                setDistribuicaoMacros({...distribuicaoMacros, g: {...distribuicaoMacros.g, qnt:currentValue}})
-                calcularDistribuicaoMacrosHandler('g', currentValue)
-                setLock2(false)
             break;
             
         }
@@ -162,8 +219,8 @@ const Metas = () => {
 
     function gravarDadosPessoais(){
         let payload ={
-            height: userData.health_data.height,
-            weight: userData.health_data.weight
+            height: userData?.health_data?.height,
+            weight: userData?.health_data?.weight
         }
 
 
@@ -187,7 +244,7 @@ const Metas = () => {
                         <input type='number' 
                             id="altura"
                             onInput={(event)=>changeDataHandler(event.currentTarget.value, 'altura')} 
-                            value={String(userData.health_data?.height)} 
+                            value={String(userData?.health_data?.height)} 
                             placeholder="digite sua altura"
                             max={280}
                             step={1}
@@ -200,7 +257,7 @@ const Metas = () => {
                         <input type='number' 
                             id="peso" 
                             onInput={(event)=>changeDataHandler(event.currentTarget.value, 'peso')} 
-                            value={String(userData.health_data?.weight)} 
+                            value={String(userData?.health_data?.weight)} 
                             placeholder="digite seu peso"
                             autoComplete="off"
                         />
@@ -223,14 +280,14 @@ const Metas = () => {
                         <input type='number' 
                             id="calorias" 
                             onInput={(event)=>changeDataHandler(event.currentTarget.value, 'calorias')} 
-                            value={String(userData.health_data?.meta_calorias)}
+                            value={String(userData?.health_data?.meta_calorias)}
                             max={10000} 
                             step={10}
                             placeholder="digite quantidade de calorias"
                             autoComplete="off"
                         />
                     </div>
-                    {userData.health_data?.meta_calorias && (
+                    {userData?.health_data?.meta_calorias && (
                         <div>
                             <div className={styles.macros}>
                                 <h3>Distribuição dos macros nutrientes</h3>
