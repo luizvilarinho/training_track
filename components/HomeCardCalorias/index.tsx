@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styles from './homeCardCalorias.module.css'
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
     calculo:{
@@ -11,14 +11,23 @@ type Props = {
         c:number,
         g:number,
         f:number
+    },
+    healthData?:{
+        weight:number,
+        height:number
+        meta_calorias:number
+        meta_macros:{
+            p:number
+            c:number
+            g:number
+        }
     }
 }
 const HomeCardCalorias:  React.FC<Props> = (props: Props) => {
 
-    const meta = 2000;
-
-
-
+    useEffect(()=>{
+        console.log("PROPS", props)
+    },[])
     return (
         <div className={`${styles.homeCardCalorias}`}>
 
@@ -45,10 +54,12 @@ const HomeCardCalorias:  React.FC<Props> = (props: Props) => {
                     </tr>
                 </tbody>
             </table>
+           
+           {props.healthData && (
             <article className={styles.resumoCalorias}>
                 <div>
                     <small>meta diária (cal.)</small>
-                    <span>{meta}</span>
+                    <span>{props.healthData.meta_calorias}</span>
                 </div>
                 <div>
                     <small>consumidas (cal.)</small>
@@ -56,14 +67,23 @@ const HomeCardCalorias:  React.FC<Props> = (props: Props) => {
                 </div>
                 <div>
                     <small>restantes (cal.)</small>
-                    <span className="green">{props.calculo.cal? meta - props.calculo.cal : 0}</span>
-                </div>
+                    <span className={`${(props.healthData.meta_calorias - props.calculo.cal) < 0? 'tomato' : 'green'}`}>{props.calculo.cal? props.healthData.meta_calorias - props.calculo.cal : 0}</span>
+                    
+             </div>
             </article>
+           )}
 
-            <div className={`${styles.btnContainer} align--center`}>
-                <Link href={'/calorias'} passHref>
-                    <button>adicionar</button>
-                </Link>
+            <div className={styles.containerBtn}>
+                <div className={`${styles.btnContainer} align--center`}>
+                    <Link href={'/calorias'} passHref>
+                        <button>adicionar</button>
+                    </Link>
+                </div>
+                <div className={`${styles.btnContainer} align--center`}>
+                    <Link href={'/metas'} passHref>
+                        <button className={'secundary-btn'}>definir metas</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

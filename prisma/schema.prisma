@@ -13,11 +13,12 @@ datasource db {
 
 model tb_user {
   id            Int           @id @default(autoincrement())
-  email          String        @unique
+  email         String        @unique
   name          String
   password      String
   tb_workout    tb_workout[]
   alimentos     tb_alimento[]
+  health_data   tb_health_data?
 }
 
 model tb_workout {
@@ -63,5 +64,24 @@ model tb_alimento {
   c             Int
   g             Int
   f             Int
+}
+
+model tb_health_data{
+  id                Int                    @id @default(autoincrement())
+  user              tb_user                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int                    @unique
+  weight            Float
+  height            Int
+  meta_calorias     Int
+  meta_macros       tb_meta_macros        @relation(fields: [meta_macros_id], references: [id], onDelete: Cascade)
+  meta_macros_id    Int                   @unique
+}
+
+model tb_meta_macros{
+  id                Int                    @id @default(autoincrement())
+  health_data       tb_health_data?
+  p                 Int
+  c                 Int
+  g                 Int
 }
 

@@ -52,7 +52,7 @@ label{
   font-weight: 600;
   color: var(--primary-color-light);
 }
-input[type='text'], input[type='password'], input[type='search']{
+input[type='text'], input[type='password'], input[type='search'], input[type='number']{
   height: 55px;
   padding: 15px;
   width: 100%;
@@ -447,7 +447,20 @@ div.hide > h1{
 .green{
   color: rgb(97, 191, 97);
 }
-
+.tomato{
+  color: tomato;
+}
+.inactive{
+  opacity: 0.5;
+  pointer-events: none;
+}
+.alertHide{
+  top:-56px;
+}
+.alertShow{
+  top: 0;
+  
+}
 
 @media (max-width: 600px) {
   .menu, .version {

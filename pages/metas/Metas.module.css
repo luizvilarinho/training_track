@@ -1,0 +1,39 @@
+.metas .calorias{
+    margin-bottom: 20px;
+}
+.metas .dadosPessoais{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.metas .dadosPessoais div.item{
+    width: 100%;
+}
+.metas .dadosPessoais input{
+    width: 80%;
+}
+.metas .dadosPessoais label{
+    width: 100%;
+    display: block;
+}
+.metas .macros{
+    margin-top:25px;
+}
+.metas .distribuicaoMacrosContainer{
+   margin-top: 20px;
+}
+.metas .distribuicaoMacrosContainer .item{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-top: 15px;
+}
+.metas .porcentagem{
+    width: 20%;
+    text-align: center;
+    height: 0;
+    font-weight: 700;
+    color: var(--primary-color-light);
+    vertical-align: bottom;
+}
+

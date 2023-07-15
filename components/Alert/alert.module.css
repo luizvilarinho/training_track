@@ -1,0 +1,15 @@
+.alert{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: rgb(97, 191, 97);
+    font-size: 1.4rem;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    
+}
+.alert svg{
+    color: rgb(78, 154, 78);
+    margin:0 15px;
+}

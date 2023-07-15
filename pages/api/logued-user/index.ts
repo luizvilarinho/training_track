@@ -9,19 +9,24 @@ var Cookies = require('cookies')
 var keys = ['keyboard cat']
 
 async function loguedUser(request: NextApiRequest, response: NextApiResponse){
-    
     //middleware
-    var cookies = new Cookies(request, response, { keys: keys })
-
-    var accsessToken = null;
-    accsessToken =  request.headers?.cookie?.split('=')[1] || ''
+    //var cookies = new Cookies(request, response, { keys: keys })
+    var accsessToken = '';
+    
+    //console.log("COOKIES", request.headers)
+    try{
+        let access:any = request?.headers?.ttaccess
+        accsessToken = access || '';
+    }catch(e){
+        accsessToken = request.headers?.cookie?.split('=')[1] || ''
+    }
     // if(request.headers && request.headers.cookie){
     //     accsessToken = request.headers.cookie.split('')[1]
     // }else{
     //     accsessToken = cookies.get('accesstoken', { signed: true })
     // }
-    
-    let userId = await Auth(accsessToken,);
+    //console.log("TOKEN", accsessToken)
+    let userId = await Auth(accsessToken);
     console.log("GETUSER", userId)
     if(!userId || userId.error){
         console.log("error",userId)
@@ -37,8 +42,22 @@ async function loguedUser(request: NextApiRequest, response: NextApiResponse){
                     where: {id: Number(userId)},
                     select:{
                         email:true,
-                        name:true
-                    }
+                        name:true,
+                        health_data: {
+                            select:{
+                                weight:true,
+                                height: true,
+                                meta_calorias:true,
+                                meta_macros:{
+                                    select:{
+                                        p:true,
+                                        c:true,
+                                        g:true
+                                    }
+                                }
+                            }
+                        }
+                    },
                 })
             
                 response.status(200).json([user])

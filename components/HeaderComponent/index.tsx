@@ -31,9 +31,7 @@ const HeaderComponent = ({userData}:any) =>{
         <section id="top-alert">
             <div className="menu">
                 <div className="logo">
-                    <Link href={'/'} passHref>
-                        <FontAwesomeIcon icon={faDumbbell} />
-                    </Link>
+                    <FontAwesomeIcon icon={faDumbbell} />
                     <Link href={'/'} passHref>
                         Training Track
                     </Link>

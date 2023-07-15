@@ -28,6 +28,8 @@ useEffect(()=>{
         pathname:'/login'
       })
     }else{
+      const userDataString = JSON.stringify(userData);
+      localStorage.setItem('TTDATA', userDataString)
       getTraining();
       getCalculoCalorias();
     }
@@ -51,7 +53,7 @@ useEffect(()=>{
 
             {calculoCalorias.loading === false && (
               <Card title={'Calorias'}>
-                  <HomeCardCalorias calculo={calculoCalorias.data} />
+                  <HomeCardCalorias healthData={userData.health_data} calculo={calculoCalorias.data} />
               </Card>
             )}
 
@@ -107,7 +109,7 @@ useEffect(()=>{
       }
 
       <article className='version'>
-        <small>v1.0.1</small>
+        <small>v1.0.2</small>
       </article>
     </>
   )
@@ -115,9 +117,11 @@ useEffect(()=>{
 
 export async function getServerSideProps(context:any){
   const { req } = context;
-  const acessToken = req.cookies.accesstoken;
+  const acessToken = req.cookies.accesstoken || '';
+  console.log("TOKEN",acessToken)
 
-  if(!req.cookies.accesstoken){
+
+  if(!acessToken){
     return {
       props:{
         userData:"",
@@ -130,7 +134,7 @@ export async function getServerSideProps(context:any){
   
   const response = await fetch(url, {
     headers: {
-      Cookie: `accesstoken=${acessToken}`
+      TTaccess: acessToken
     }
   })
   
