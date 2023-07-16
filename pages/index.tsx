@@ -132,13 +132,24 @@ export async function getServerSideProps(context:any){
 
   const url = process.env.NEXT_PUBLIC_GET_USER || ""
   
-  const response = await fetch(url, {
-    headers: {
-      TTaccess: acessToken
-    }
-  })
+  let response;
+  let userData;
+
+  try{
+    response = await fetch(url, {
+      headers: {
+        TTaccess: acessToken
+      }
+    })
+
+    userData = await response.json()
+  }catch(e){
+    console.log(e)
+    userData = []
+  }
+
   
-  const userData:any = await response.json()
+  
 
   return {
     props:{
