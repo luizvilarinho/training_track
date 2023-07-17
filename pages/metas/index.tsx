@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import HeaderComponent from "../../components/HeaderComponent";
 import styles from "../../components/metas/Metas.module.css"
@@ -6,6 +6,7 @@ import calcularDistribuicaoMacros from "../../components/metas/calcularDistribui
 import usePost from "../../components/hooks/usePost";
 import Alert from "../../components/Alert";
 import useAlert from "../../components/hooks/useAlert";
+import { NextPage } from "next";
 
 interface UserData {
     name:string
@@ -48,27 +49,27 @@ interface InitialUserData {
     health_data: HealthData | null;
   }
 
-const Metas = () => {
+const Metas: NextPage = ({getUserData}:any) => {
     const [postHealthData, postHealthDataCall] = usePost({url: process.env.NEXT_PUBLIC_HEALTH_DATA, payload: null});
     
 
 
-  const [userData, setUserData] = useState<InitialUserData | null>(null);
+    const [userData, setUserData] = useState<InitialUserData | null>(null);
 
     const [show, alertShowHide] = useAlert();
 
     const [distribuicaoMacros, setDistribuicaoMacros] = useState<DistribuicaoMacros>({
-        calorias: userData?.health_data?.meta_calorias || 0,
+        calorias: getUserData?.health_data?.meta_calorias || 0,
         p: {
-          qnt: userData?.health_data?.meta_macros?.p || 0,
+          qnt: getUserData?.health_data?.meta_macros?.p || 0,
           porcentagem: 0
         },
         c: {
-          qnt: userData?.health_data?.meta_macros?.c || 0,
+          qnt: getUserData?.health_data?.meta_macros?.c || 0,
           porcentagem: 0
         },
         g: {
-          qnt: userData?.health_data?.meta_macros?.g || 0,
+          qnt: getUserData?.health_data?.meta_macros?.g || 0,
           porcentagem: 0
         }
       });
@@ -77,30 +78,26 @@ const Metas = () => {
     const [lock2, setLock2] = useState(true);
     
     useEffect(() => {
-        const userDataStorage = localStorage.getItem('TTDATA');
+        
+      
 
-        if (typeof userDataStorage === 'string') {
-          setUserData(JSON.parse(userDataStorage));
-        }
+        if(!getUserData?.health_data){
+            let fillUserData:any = getUserData;
 
-        if(!userData?.health_data){
-            let fillUserData:any = {
-                name:userData?.name,
-                email:userData?.email,
-                health_data:{
-                    height: 0,
-                    meta_calorias:0,
-                    weight: 0,
-                    meta_macros: {
-                        p:0,
-                        c: 0,
-                        g:0
-                    }
-
+            fillUserData['health_data'] = {
+                height: 0,
+                meta_calorias:0,
+                weight: 0,
+                meta_macros: {
+                    p:0,
+                    c: 0,
+                    g:0
                 }
             }
 
             setUserData(fillUserData);
+        }else{
+            setUserData(getUserData);
         }
 
     }, []);
@@ -377,5 +374,38 @@ const Metas = () => {
         </>
     )
 }
+
+export async function getServerSideProps(context:any){
+    const { req } = context;
+    const acessToken = req.cookies.accesstoken || '';
+    console.log("TOKEN",acessToken)
+  
+  
+    if(!acessToken){
+      return {
+        props:{
+          userData:"",
+          isAuthenticated:false
+        }
+      }
+    } 
+  
+    const url = process.env.NEXT_PUBLIC_GET_USER || ""
+    
+    const response = await fetch(url, {
+      headers: {
+        TTaccess: acessToken
+      }
+    })
+    
+    const userData:any = await response.json()
+  
+    return {
+      props:{
+        getUserData:userData[0],
+        isAuthenticated: true
+      }
+    }
+  }
 
 export default Metas;
