@@ -7,6 +7,7 @@ import usePost from "../../components/hooks/usePost";
 import Alert from "../../components/Alert";
 import useAlert from "../../components/hooks/useAlert";
 import { NextPage } from "next";
+import BtnVoltar from "../../components/elementos/btnVoltar";
 
 interface UserData {
     name:string
@@ -314,9 +315,9 @@ const Metas: NextPage = ({getUserData}:any) => {
                                 <div className={styles.distribuicaoMacrosContainer}>
                                     <div className={styles.item}>
                                         <div>
-                                            <label htmlFor="alimento">quantidade de proteína (g)</label>
+                                            <label htmlFor="alimento1">quantidade de proteína (g)</label>
                                             <input type='number' 
-                                                id="calorias" 
+                                                id='alimento1'
                                                 onChange={(event)=>changeDataHandler(event.currentTarget.value, 'p')}
                                                 value={String(distribuicaoMacros.p.qnt)}
                                                 placeholder="digite quantidade de calorias"
@@ -329,9 +330,9 @@ const Metas: NextPage = ({getUserData}:any) => {
                                     
                                     <div className={styles.item}>
                                         <div>
-                                            <label htmlFor="alimento">quantidade de carboidrato (g)</label>
+                                            <label htmlFor="alimento2">quantidade de carboidrato (g)</label>
                                             <input type='number' 
-                                                id="calorias" 
+                                                id='alimento2'
                                                 onChange={(event)=>changeDataHandler(event.currentTarget.value, 'c')}
                                                 value={String(distribuicaoMacros.c.qnt)}
                                                 placeholder="digite quantidade de calorias"
@@ -342,9 +343,9 @@ const Metas: NextPage = ({getUserData}:any) => {
                                     </div>
                                     <div className={styles.item}>
                                         <div>
-                                            <label htmlFor="alimento">quantidade de gordura (g)</label>
+                                            <label htmlFor="alimento3">quantidade de gordura (g)</label>
                                             <input type='number' 
-                                                id="calorias" 
+                                                id=''
                                                 onInput={(event)=>changeDataHandler(event.currentTarget.value, 'meta_macros')}
                                                 onChange={(event)=> calcularDistribuicaoMacrosHandler('g')} 
                                                 value={distribuicaoMacros.g.qnt}
@@ -369,7 +370,7 @@ const Metas: NextPage = ({getUserData}:any) => {
 
                 </div>
             </Card>
-
+            <BtnVoltar />
         </div>
         </>
     )

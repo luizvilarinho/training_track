@@ -4,7 +4,7 @@ export function toBrLocaleDate(data:string){
 }
 
 export function toEUALocaleDate(data:string){
-    console.log("DATA", data)
+    //console.log("DATA", data)
     const [d,m,y] = data.split('/')
     return `${y}-${m}-${d}`
 }

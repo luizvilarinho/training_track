@@ -109,7 +109,7 @@ useEffect(()=>{
       }
 
       <article className='version'>
-        <small>v1.0.2</small>
+        <small>v1.0.3</small>
       </article>
     </>
   )

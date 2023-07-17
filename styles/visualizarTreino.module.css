@@ -1,0 +1,16 @@
+.visualizarTreino{}
+
+.visualizarTreino label{
+    display: block;
+    width: 100%;
+}
+.visualizarTreino input{
+    display: block;
+    width: 100%;
+}
+.visualizarTreino .empty{
+    margin: 25px;
+    color: var(--primary-color-light);
+    font-size: 1.1rem;
+    font-style: italic;
+}
