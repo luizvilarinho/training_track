@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-#RUN chown -R node:node /root/.npm
+RUN chown -R node:node /root/.npm
 ENV npm_config_cache /home/node/app/.npm
 
 RUN npm install
