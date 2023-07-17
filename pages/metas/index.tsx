@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Card from "../../components/Card";
 import HeaderComponent from "../../components/HeaderComponent";
 import styles from "../../components/metas/Metas.module.css"
@@ -51,12 +51,7 @@ interface InitialUserData {
 const Metas = () => {
     const [postHealthData, postHealthDataCall] = usePost({url: process.env.NEXT_PUBLIC_HEALTH_DATA, payload: null});
     
-   useEffect(() => {
-    const userDataStorage = localStorage.getItem('TTDATA');
-    if (typeof userDataStorage === 'string') {
-      setUserData(JSON.parse(userDataStorage));
-    }
-  }, []);
+
 
   const [userData, setUserData] = useState<InitialUserData | null>(null);
 
@@ -81,15 +76,43 @@ const Metas = () => {
     const [lock, setLock] = useState(true);
     const [lock2, setLock2] = useState(true);
     
+    useEffect(() => {
+        const userDataStorage = localStorage.getItem('TTDATA');
+
+        if (typeof userDataStorage === 'string') {
+          setUserData(JSON.parse(userDataStorage));
+        }
+
+        if(!userData?.health_data){
+            let fillUserData:any = {
+                name:userData?.name,
+                email:userData?.email,
+                health_data:{
+                    height: 0,
+                    meta_calorias:0,
+                    weight: 0,
+                    meta_macros: {
+                        p:0,
+                        c: 0,
+                        g:0
+                    }
+
+                }
+            }
+
+            setUserData(fillUserData);
+        }
+
+    }, []);
+
    useEffect(()=>{
     if(userData?.health_data?.meta_calorias){
         let distMacros:DistribuicaoMacros = {...distribuicaoMacros, calorias: userData.health_data?.meta_calorias}
         let newDataMacros = calcularDistribuicaoMacros(distMacros)
         setDistribuicaoMacros(newDataMacros)
     }
-    
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [userData?.health_data?.meta_calorias])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData?.health_data?.meta_calorias])
 
     function changeDataHandler(value:string, field:string){
     let currentValue = parseInt(value, 10);
@@ -287,7 +310,7 @@ const Metas = () => {
                             autoComplete="off"
                         />
                     </div>
-                    {userData?.health_data?.meta_calorias && (
+                    {userData?.health_data?.meta_calorias ? (
                         <div>
                             <div className={styles.macros}>
                                 <h3>Distribuição dos macros nutrientes</h3>
@@ -345,7 +368,7 @@ const Metas = () => {
                             </div>
                         </div>
 
-                    )}
+                    ) : ""}
 
                 </div>
             </Card>
