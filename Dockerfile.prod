@@ -10,6 +10,11 @@ ENV npm_config_cache /home/node/app/.npm
 RUN npm install
 
 RUN npx prisma generate
+
+# Aplique as migrações do Prisma
+#RUN npx prisma migrate deploy
+
+
 RUN npm run build
 
 
