@@ -1,3 +1,19 @@
+interface DistribuicaoMacros{
+    calorias: number
+    p:{
+        qnt:number
+        porcentagem:number
+    }
+    c:{
+        qnt:number
+        porcentagem:number
+    }
+    g:{
+        qnt:number
+        porcentagem:number
+    }
+}
+
 export default function calcularDistribuicaoMacros(macros:DistribuicaoMacros, macro?:string, value?:number) : DistribuicaoMacros{
    
     console.log("CALC", macros, macro,value)

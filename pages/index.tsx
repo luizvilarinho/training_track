@@ -29,7 +29,7 @@ useEffect(()=>{
       })
     }else{
       const userDataString = JSON.stringify(userData);
-      localStorage.setItem('TTDATA', userDataString)
+      window.localStorage.setItem('TTDATA', userDataString)
       getTraining();
       getCalculoCalorias();
     }
