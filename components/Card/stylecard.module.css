@@ -1,4 +1,6 @@
-.card{}
+.card .recuperarCredenciais{
+    color: var(--primary-color-light);
+}
 
 
 @media (min-width: 1000px) {

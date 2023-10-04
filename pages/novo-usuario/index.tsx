@@ -6,11 +6,18 @@ import Card from '../../components/Card';
 import usePost from '../../components/hooks/usePost';
 import s from '../../styles/Login.module.css'
 import router from "next/router";
+import InlineAlert from '../../components/inlineAlert';
+import { validarFormularioLogin } from '../login/loginService';
 
 
 // import { Container } from './styles';
 
 const NovoUsuario =  () => {
+
+    const [alert, setAlert] = useState({
+        show:false,
+        message:''
+    });
 
     const [payloadForm, setPayloadForm] = useState({
         email:'',
@@ -27,9 +34,20 @@ const NovoUsuario =  () => {
         if(response.data?.success === true){
             router.push('/login')
         }
+
+        if(response.data?.success === false) {
+            setAlert({...alert, message:response.data.message, show:true});
+        }
+
     }, [response])
     function sendHttpPostRequest(){
         //console.log("payload", payloadForm)
+         let message = validarFormularioLogin(payloadForm);
+        if(message){
+            setAlert({...alert, message, show:true});
+            return
+        }
+        
         httpPost();
     }
     
@@ -49,31 +67,23 @@ const NovoUsuario =  () => {
             <Card title="novo usuário" containerClass=''>
                     <div className="md-mar--top">
                         <label htmlFor="nome" className={s.w100}>Nome</label>
-                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , name:e.currentTarget.value})} id="nome" className="" placeholder="preencha seu nome" />
+                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , name:e.currentTarget.value})} id="nome" className="" placeholder="preencha seu nome" maxLength={50}/>
 
                     </div>
                     <div className="md-mar--top">
                         <label htmlFor="email" className={s.w100}>Email</label>
-                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , email:e.currentTarget.value})} id="email" className="" placeholder="preencha seu email" />
+                        <input type="text" onChange={(e)=>setPayloadForm({... payloadForm , email:e.currentTarget.value.toLocaleLowerCase()})} id="email" className="" placeholder="preencha seu email"  maxLength={50}/>
 
                     </div>
                     <div className="l-mar--top md-mar--bottom">
                         <label htmlFor="senha">Senha</label>
-                        <input type="password" id="senha" onChange={(e)=>setPayloadForm({... payloadForm , password:e.currentTarget.value})} className="" placeholder="preencha a sua senha" />
+                        <input type="password" id="senha" onChange={(e)=>setPayloadForm({... payloadForm , password:e.currentTarget.value.toLocaleLowerCase()})} className="" placeholder="preencha a sua senha" maxLength={8} minLength={3} />
 
                     </div>
 
                     <div>
                     
-                        {response?.data.success === false && (
-                            <Fragment>
-                                <div className="red-alert-message">
-                                    <FontAwesomeIcon icon={faCircleExclamation} />
-                                    <span style={{marginLeft:'10px'}}>{response.data.message}</span>
-                                </div>
-                                
-                            </Fragment>
-                        )}
+                        <InlineAlert show={alert.show} mensagem={alert.message} />
                     </div>
 
             </Card>

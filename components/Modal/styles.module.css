@@ -11,6 +11,11 @@
    align-items: center;
 }
 
+.modalContainer h1{
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+
 .modalContainer .modalContent{
     width: 30%;
     height: 30%;
@@ -23,11 +28,12 @@
 }
 
 .modalContainer .btnContaner{
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 .modalContainer .btnContaner button{
     margin: 0 15px;
     width: 30%;
+    padding: 12px;
 }
 
 @media screen and (max-width: 1000px) {

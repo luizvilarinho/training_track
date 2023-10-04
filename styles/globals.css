@@ -461,6 +461,16 @@ div.hide > h1{
   top: 0;
   
 }
+.esqueci{
+  text-align: right;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+button[disabled]{
+  opacity: .5;
+  pointer-events: none;
+}
 
 @media (max-width: 600px) {
   .menu, .version {

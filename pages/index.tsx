@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import AgendaContent from '../components/AgendaContent';
 import Lista from '../components/Lista';
 import UltimoTreino from '../components/UltimoTreino';
-import {Fragment, useEffect, useMemo} from 'react';
+import {Fragment, useEffect, useMemo, useState} from 'react';
 import useGet from '../components/hooks/useGet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -12,10 +12,17 @@ import HomeCardCalorias from "../components/HomeCardCalorias";
 import usePost from "../components/hooks/usePost";
 import HeaderComponent from '../components/HeaderComponent';
 import router from 'next/router';
+import { Modal } from '../components/Modal';
 
 const Home: NextPage = ({userData, isAuthenticated}:any) => {
 
-
+const styleRodape = {
+  'display': 'flex',
+  'justifyContent': 'space-between',
+  'fontSize': '.9rem',
+  'border-top': '1px solid var(--primary-color-light)',
+  'padding':'1rem 0'
+}
 
 const [dados, getTraining] = useGet({url: process.env.NEXT_PUBLIC_GETTRANING});
 const [calculoCalorias, getCalculoCalorias] = usePost({url: process.env.NEXT_PUBLIC_REFEICAO_CALCULAR, payload:{data:new Date().toLocaleDateString()}})
@@ -36,6 +43,8 @@ useEffect(()=>{
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
+
+
 
   return (
     <>
@@ -109,7 +118,10 @@ useEffect(()=>{
       }
 
       <article className='version'>
-        <small>v1.0.3</small>
+        <div style={styleRodape}>
+          <small >envia sua sugestão para luizvilarinho@zohomail.com</small>
+          <small>v1.0.4</small>
+        </div>
       </article>
     </>
   )
