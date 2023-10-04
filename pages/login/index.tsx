@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Card from '../../components/Card';
 import usePost from '../../components/hooks/usePost';
 import s from '../../styles/Login.module.css'
-import { emailPass, validarFormularioLogin } from './loginService';
+import { emailPass, validarFormularioLogin } from '../../services/loginService';
 import InlineAlert from '../../components/inlineAlert';
 import { Modal } from '../../components/Modal';
 

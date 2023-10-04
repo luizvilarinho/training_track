@@ -7,7 +7,7 @@ import usePost from '../../components/hooks/usePost';
 import s from '../../styles/Login.module.css'
 import router from "next/router";
 import InlineAlert from '../../components/inlineAlert';
-import { validarFormularioLogin } from '../login/loginService';
+import { validarFormularioLogin } from '../../services/loginService';
 
 
 // import { Container } from './styles';

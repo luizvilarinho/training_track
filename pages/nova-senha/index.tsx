@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { useRouter } from "next/router";
 import InlineAlert from "../../components/inlineAlert";
-import { novaSenhaIsValid } from "./novaSenhaService";
+import { novaSenhaIsValid } from "../../services/novaSenhaService";
 import usePost from "../../components/hooks/usePost";
 
 const NovaSenha = () => {
