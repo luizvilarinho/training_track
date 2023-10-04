@@ -28,6 +28,7 @@ const VisualizarTreino: React.FC = (props) => {
 
     useEffect(()=>{
         getCall();
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchDate])
 
     function editHandler(){

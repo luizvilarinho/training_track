@@ -100,7 +100,7 @@ const Metas: NextPage = ({getUserData}:any) => {
         }else{
             setUserData(getUserData);
         }
-
+ // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
    useEffect(()=>{
