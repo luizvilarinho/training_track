@@ -13,11 +13,10 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
     useEffect(()=>{
         emailSend()
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(()=>{
-        console.log("emailResponse", emailResponse.data)
-    },[emailResponse])
+
 
     return (
         <Card title="Recuperar Credenciais">

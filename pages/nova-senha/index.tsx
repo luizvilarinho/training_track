@@ -27,6 +27,7 @@ const NovaSenha = () => {
         if (updatePasswordResponse && updatePasswordResponse?.data?.result?.success) {
             router.push('/login')
         }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updatePasswordResponse]);
     
     function gravarNovaSenhaHandler(){
