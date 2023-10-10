@@ -4,17 +4,16 @@ import Card from '../components/Card';
 import AgendaContent from '../components/AgendaContent';
 import Lista from '../components/Lista';
 import UltimoTreino from '../components/UltimoTreino';
-import {Fragment, useEffect, useMemo, useState} from 'react';
+import {useEffect, useState} from 'react';
 import useGet from '../components/hooks/useGet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import HomeCardCalorias from "../components/HomeCardCalorias";
 import usePost from "../components/hooks/usePost";
 import HeaderComponent from '../components/HeaderComponent';
 import router from 'next/router';
-import { Modal } from '../components/Modal';
 
-const Home: NextPage = ({userData, isAuthenticated}:any) => {
+const Home: NextPage = () => {
 
 const styleRodape = {
   'display': 'flex',
@@ -24,26 +23,40 @@ const styleRodape = {
   'padding':'1rem 0'
 }
 
+const [userData, getUserData] = useGet({url: process.env.NEXT_PUBLIC_GET_USER});
 const [dados, getTraining] = useGet({url: process.env.NEXT_PUBLIC_GETTRANING});
 const [calculoCalorias, getCalculoCalorias] = usePost({url: process.env.NEXT_PUBLIC_REFEICAO_CALCULAR, payload:{data:new Date().toLocaleDateString()}})
 
-useEffect(()=>{
-    console.log("USERDATA",userData, isAuthenticated)
+const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    if(isAuthenticated === false){
-      router.push({
-        pathname:'/login'
-      })
-    }else{
-      const userDataString = JSON.stringify(userData);
-      window.localStorage.setItem('TTDATA', userDataString)
-      getTraining();
-      getCalculoCalorias();
-    }
+useEffect(()=>{
+
+  //console.log("userData", userData)
+  getUserData();
+
+    //console.log("USERDATA",userData, isAuthenticated)
+
+    // if(isAuthenticated === false){
+    //   router.push({
+    //     pathname:'/login'
+    //   })
+    // }else{
+    //   const userDataString = JSON.stringify(userData);
+    //   window.localStorage.setItem('TTDATA', userDataString)
+    //   getTraining();
+    //   getCalculoCalorias();
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
+useEffect(()=>{
+  console.log("USARDATA", userData)
+  if(userData?.data[0]?.success){
+    window.scrollTo({left:0, top:0});
+    setIsAuthenticated(true)
+  }
+}, [userData])
 
 
   return (
@@ -57,12 +70,12 @@ useEffect(()=>{
           <div>
 
             <div>
-              <HeaderComponent userData={userData}/>
+              <HeaderComponent userData={userData?.data[0]?.user}/>
             </div>
 
             {calculoCalorias.loading === false && (
               <Card title={'Calorias'}>
-                  <HomeCardCalorias healthData={userData.health_data} calculo={calculoCalorias.data} />
+                  <HomeCardCalorias healthData={userData?.data[0]?.user.health_data} calculo={calculoCalorias.data} />
               </Card>
             )}
 
@@ -127,48 +140,54 @@ useEffect(()=>{
   )
 }
 
-export async function getServerSideProps(context:any){
-  const { req } = context;
-  const acessToken = req.cookies.accesstoken || '';
-  console.log("TOKEN",acessToken)
+// export async function getServerSideProps(context:any){
+//   const { req, res } = context;
+
+//   res.setHeader(
+//     'Cache-Control',
+//     'public, s-maxage=10, stale-while-revalidate=10'
+//   )
+
+//   const acessToken = req.cookies.accesstoken || '';
+//   console.log("TOKEN",acessToken)
 
 
-  if(!acessToken){
-    return {
-      props:{
-        userData:"",
-        isAuthenticated:false
-      }
-    }
-  } 
+//   if(!acessToken){
+//     return {
+//       props:{
+//         userData:"",
+//         isAuthenticated:false
+//       }
+//     }
+//   } 
 
-  const url = process.env.NEXT_PUBLIC_GET_USER || ""
+//   const url = process.env.NEXT_PUBLIC_GET_USER || ""
   
-  let response;
-  let userData;
+//   let response;
+//   let userData;
 
-  try{
-    response = await fetch(url, {
-      headers: {
-        TTaccess: acessToken
-      }
-    })
+//   try{
+//     response = await fetch(url, {
+//       headers: {
+//         TTaccess: acessToken
+//       }
+//     })
 
-    userData = await response.json()
-  }catch(e){
-    console.log(e)
-    userData = []
-  }
+//     userData = await response.json()
+//   }catch(e){
+//     console.log(e)
+//     userData = []
+//   }
 
   
   
 
-  return {
-    props:{
-      userData:userData[0],
-      isAuthenticated: true
-    }
-  }
-}
+//   return {
+//     props:{
+//       userData:userData[0],
+//       isAuthenticated: true
+//     }
+//   }
+// }
 
 export default Home

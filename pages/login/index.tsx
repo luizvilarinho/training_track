@@ -1,4 +1,4 @@
-import { faCircleExclamation, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import router from 'next/router';
@@ -36,9 +36,11 @@ function Login(){
     const [response, httpPost] = usePost({url:process.env.NEXT_PUBLIC_LOGIN, payload:payloadForm})
 
     useEffect(()=>{
-        console.log("RESPONSE", response);
+        console.log("RESPONSE", response, response.data?.success);
         if(response.data?.success){
-            router.push('/')
+            router.push({
+                pathname:'/'
+            })
         }
         if(response.data?.success === false) {
             setAlert({...alert, message:response.data.message, show:true});

@@ -9,24 +9,35 @@ var Cookies = require('cookies')
 var keys = ['keyboard cat']
 
 async function loguedUser(request: NextApiRequest, response: NextApiResponse){
-    //middleware
-    //var cookies = new Cookies(request, response, { keys: keys })
-    var accsessToken = '';
-    
-    //console.log("COOKIES", request.headers)
-    try{
-        let access:any = request?.headers?.ttaccess
-        accsessToken = access || '';
-    }catch(e){
-        accsessToken = request.headers?.cookie?.split('=')[1] || ''
+   
+    var accsessToken: string | undefined;
+    let headerAccessToken = String(request?.headers?.ttaccess || '')
+    console.log(headerAccessToken)
+    if(headerAccessToken){
+        accsessToken = headerAccessToken
+    }else{
+        var cookies = new Cookies(request, response, { keys: keys })
+        accsessToken =  cookies.get('accesstoken', { signed: true })
+        console.log(accsessToken)
     }
+
+    console.log("cookies.accsessToken", accsessToken )
+
+    //console.log("COOKIES", request.headers)
+    // try{
+    //     let access:any = request?.headers?.ttaccess
+    //     accsessToken = access || '';
+    // }catch(e){
+    //     accsessToken = request.headers?.cookie?.split('=')[1] || ''
+    // }
     // if(request.headers && request.headers.cookie){
     //     accsessToken = request.headers.cookie.split('')[1]
     // }else{
     //     accsessToken = cookies.get('accesstoken', { signed: true })
     // }
     //console.log("TOKEN", accsessToken)
-    let userId = await Auth(accsessToken);
+    let userId = await Auth(String(accsessToken));
+
     console.log("GETUSER", userId)
     if(!userId || userId.error){
         console.log("error",userId)
@@ -59,8 +70,8 @@ async function loguedUser(request: NextApiRequest, response: NextApiResponse){
                         }
                     },
                 })
-            
-                response.status(200).json([user])
+                console.log("USER", user)
+                response.status(200).json([{success:true, user}])
         
             }catch (error) {
                 return error

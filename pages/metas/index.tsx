@@ -398,12 +398,12 @@ export async function getServerSideProps(context:any){
         TTaccess: acessToken
       }
     })
-    
     const userData:any = await response.json()
+    console.log(acessToken,userData)
   
     return {
       props:{
-        getUserData:userData[0],
+        getUserData:userData[0].user,
         isAuthenticated: true
       }
     }

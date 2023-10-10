@@ -2,7 +2,7 @@ import { Jwt } from "jsonwebtoken";
 var jwt = require('jsonwebtoken');
 
 export function Auth(token:string){
-
+    console.log("AUTH", token)
     if(!token) {
        return {error: 'unauthorized'}
         
