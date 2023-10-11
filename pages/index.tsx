@@ -12,6 +12,7 @@ import HomeCardCalorias from "../components/HomeCardCalorias";
 import usePost from "../components/hooks/usePost";
 import HeaderComponent from '../components/HeaderComponent';
 import router from 'next/router';
+import UltimaSemana from '../components/UltimaSemana';
 
 const Home: NextPage = () => {
 
@@ -104,28 +105,13 @@ useEffect(()=>{
               <Destaque subtitle="treino geral"/>       
                       
             </Card> */}
-            
-            <section hidden id="last-section">
-              <Card title="último mês" containerClass=''>
-                  
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="peitoral" sets={4} />
-                <Lista muscle="cardio" sets={150} />
-                  
-                {/* <div className="sm-mar--top">
-                    <h4>cardio</h4>
-                    <div className="flex-container space-between">
-                        <div className="md-mar--right">elíptico</div>
-                        <div className="bold">35 min</div>
-                    </div>
-                </div> */}
-              </Card>
+              {dados.data.length > 0 && (
+                <Card title="últimos 7 dias" containerClass=''>
+                  <UltimaSemana />
+                </Card>
+              )}
 
-            </section>
+            
           </div>
         ):(
           <div className="loading">
