@@ -33,7 +33,7 @@ useEffect(()=>{
 
   //console.log("userData", userData)
   getUserData();
-
+  
     //console.log("USERDATA",userData, isAuthenticated)
 
     // if(isAuthenticated === false){
@@ -51,11 +51,17 @@ useEffect(()=>{
 }, []);
 
 useEffect(()=>{
-  console.log("USARDATA", userData)
   if(userData?.data[0]?.success){
+    console.log("USARDATA", userData)
     window.scrollTo({left:0, top:0});
     setIsAuthenticated(true)
+    getTraining();
+    getCalculoCalorias();
+
+    const userDataString = JSON.stringify(userData);
+    window.localStorage.setItem('TTDATA', userDataString)
   }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [userData])
 
 
