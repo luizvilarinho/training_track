@@ -38,6 +38,7 @@ function Login(){
     useEffect(()=>{
         console.log("RESPONSE", response, response.data?.success);
         if(response.data?.success){
+            localStorage.setItem('ttaccess', response.data.token);
             router.push({
                 pathname:'/'
             })

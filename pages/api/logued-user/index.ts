@@ -12,11 +12,13 @@ async function loguedUser(request: NextApiRequest, response: NextApiResponse){
    
     var accsessToken: string | undefined;
     let headerAccessToken = String(request?.headers?.ttaccess || '')
-    console.log(headerAccessToken)
+    var cookies = new Cookies(request, response, { keys: keys })
+
     if(headerAccessToken){
         accsessToken = headerAccessToken
+        cookies.set('accesstoken', accsessToken, { signed: true });
     }else{
-        var cookies = new Cookies(request, response, { keys: keys })
+        //var cookies = new Cookies(request, response, { keys: keys })
         accsessToken =  cookies.get('accesstoken', { signed: true })
         console.log(accsessToken)
     }

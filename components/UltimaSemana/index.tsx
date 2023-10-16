@@ -12,27 +12,27 @@ const UltimaSemana: FunctionComponent<UltimaSemanaProps> = () => {
 
     useEffect(() => {
         getTreinosSemana();
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useEffect(() => {
-        console.log("TREINOSEMANA", treinosSemana)
-    },[treinosSemana])
+
 
     function treinoSemanaRender(treinosSemana:{[exercicio:string]:{sets:number, type:number}}){
         let template:any =[]
         for(let keyTreino in treinosSemana){
-            //console.log(keyTreino)
+           
             if(keyTreino != 'cardio'){
-                template.push(<Lista muscle={keyTreino} sets={treinosSemana[keyTreino].sets} />)
+                console.log(template.length)
+                template.push(<Lista key={treinosSemana[keyTreino].sets} muscle={keyTreino} sets={treinosSemana[keyTreino].sets} />)
             }
         }
 
         if(treinosSemana.cardio){
+            console.log(template.length)
            template.push(
             (
                 <div className="sm-mar--top">
-                    <Lista muscle={'cardio'} sets={treinosSemana['cardio'].sets} />
+                    <Lista key={treinosSemana['cardio'].sets} muscle={'cardio'} sets={treinosSemana['cardio'].sets} />
                 </div>
             )
            )

@@ -124,8 +124,8 @@ useEffect(()=>{
 
       <article className='version'>
         <div style={styleRodape}>
-          <small >envia sua sugestão para luizvilarinho@zohomail.com</small>
-          <small>v1.0.4</small>
+          <small >envia sua sugestão para <strong>luizvilarinho@zohomail.com</strong></small>
+          <small>v1.0.5</small>
         </div>
       </article>
     </>
