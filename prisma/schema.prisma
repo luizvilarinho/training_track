@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl", "windows"]
 }
 
@@ -12,31 +9,31 @@ datasource db {
 }
 
 model tb_user {
-  id            Int           @id @default(autoincrement())
-  email         String        @unique
-  name          String
-  password      String
-  tb_workout    tb_workout[]
-  alimentos     tb_alimento[]
-  health_data   tb_health_data?
+  id          Int             @id @default(autoincrement())
+  email       String          @unique
+  name        String
+  password    String
+  alimentos   tb_alimento[]
+  health_data tb_health_data?
+  tb_workout  tb_workout[]
 }
 
 model tb_workout {
   id           Int        @id @default(autoincrement())
-  user         tb_user    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
-  training     tb_group[]
-  lastTraining Boolean
   date         DateTime
+  lastTraining Boolean
+  user         tb_user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  training     tb_group[]
 }
 
 model tb_group {
-  id           Int         @id @default(autoincrement())
-  type         Int
+  id           Int        @id @default(autoincrement())
   description  String
   sets         Int
-  tb_workout   tb_workout? @relation(fields: [tb_workoutId], references: [id], onDelete: Cascade)
   tb_workoutId Int
+  type         Int
+  tb_workout   tb_workout @relation(fields: [tb_workoutId], references: [id], onDelete: Cascade)
 }
 
 model tb_group_type {
@@ -51,37 +48,36 @@ model tb_tipo_refeicao {
 }
 
 model tb_alimento {
-  id            Int                     @id @default(autoincrement())
-  tipo          tb_tipo_refeicao        @relation(fields: [tipoId], references: [id])
-  user          tb_user                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        Int
-  tipoId        Int
-  date          DateTime
-  nome          String
-  qnt           Decimal
-  cal           Int
-  p             Int
-  c             Int
-  g             Int
-  f             Int
+  id     Int              @id @default(autoincrement())
+  tipoId Int
+  nome   String
+  cal    Int
+  p      Int
+  c      Int
+  g      Int
+  f      Int
+  date   DateTime
+  userId Int
+  qnt    Decimal
+  tipo   tb_tipo_refeicao @relation(fields: [tipoId], references: [id])
+  user   tb_user          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model tb_health_data{
-  id                Int                    @id @default(autoincrement())
-  user              tb_user                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            Int                    @unique
-  weight            Float
-  height            Int
-  meta_calorias     Int
-  meta_macros       tb_meta_macros        @relation(fields: [meta_macros_id], references: [id], onDelete: Cascade)
-  meta_macros_id    Int                   @unique
+model tb_health_data {
+  id             Int            @id @default(autoincrement())
+  userId         Int            @unique
+  weight         Float
+  height         Int
+  meta_calorias  Int
+  meta_macros_id Int            @unique
+  meta_macros    tb_meta_macros @relation(fields: [meta_macros_id], references: [id], onDelete: Cascade)
+  user           tb_user        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model tb_meta_macros{
-  id                Int                    @id @default(autoincrement())
-  health_data       tb_health_data?
-  p                 Int
-  c                 Int
-  g                 Int
+model tb_meta_macros {
+  id          Int             @id @default(autoincrement())
+  p           Int
+  c           Int
+  g           Int
+  health_data tb_health_data?
 }
-
