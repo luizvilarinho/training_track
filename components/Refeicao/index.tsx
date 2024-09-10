@@ -157,13 +157,18 @@ const Refeicao = (props: Props) => {
         }
     }
 
+    function onFocusHandler(){
+        let rash = `card-${props.nomeRefeicao}`;
+        window.location.hash = rash;
+    }
+
     return (
         <div className={styles.calorias}>
             
             <section className={styles.sectionMacros}>
                 <div className={styles.sectionInput}>
                     <article className={styles.containerAlimento}>
-                        <h3>{props.nomeRefeicao} </h3>
+                        <h3 id={`card-${props.nomeRefeicao}`}>{props.nomeRefeicao} </h3>
                         <label htmlFor="alimento">alimento</label>
                         <input type='text' 
                             id="alimento" 
@@ -172,6 +177,7 @@ const Refeicao = (props: Props) => {
                             value={alimentoForm.alimento} 
                             placeholder="nome do alimento"
                             autoComplete="off"
+                            onFocus={onFocusHandler}
                         />
 
                         <div className={`${styles.selectContainer} ${alimentosToSelect.length > 0 && alimentoForm.alimento.length > 2? styles.open : styles.close}`}>
