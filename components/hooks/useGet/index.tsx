@@ -21,7 +21,8 @@ function GetHandler(props:Props){
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'ttaccess': localStorage.getItem('ttaccess') || ''
             }
             }).then(response=>{
                 if(response.status === 401 || response.status === 500){

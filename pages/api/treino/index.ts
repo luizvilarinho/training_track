@@ -4,6 +4,7 @@ import { getTreino } from "./getTreino";
 import { PrismaClient } from "@prisma/client";
 import { postTreino } from "./postTreino";
 import { getTreinoById } from "./getTrainoById";
+import { getTreinoByDate } from "./getTreinoByDate";
 
 const prisma:PrismaClient = new PrismaClient()
 
@@ -28,10 +29,16 @@ async function treinoHandler(request: NextApiRequest, response: NextApiResponse)
     switch(request.method){
         case 'GET':
             //gettreino
-            let { workoutid } = request.query;
+            let { workoutid, calendar } = request.query;
 
-            console.log(workoutid, request.query);
-            if(workoutid){
+            if(calendar){
+                getTreinoByDate(prisma, userId, String(calendar)).then((resp)=>{
+                    response.status(200).json(resp)
+                }).finally(()=>{
+                    console.log("DISCONECT")
+                    prisma.$disconnect();
+                })
+            }else if(workoutid){
                 getTreinoById(prisma, String(workoutid)).then((resp)=>{
                     response.status(200).json(resp)
                 }).finally(()=>{

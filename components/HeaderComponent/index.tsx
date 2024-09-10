@@ -1,7 +1,5 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import circle_notifications_white_24dp from '../../public/assets/img/circle_notifications_white_24dp.svg'
 import useGet from '../hooks/useGet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons'
@@ -37,7 +35,7 @@ const HeaderComponent = ({userData}:any) =>{
                     </Link>
                    
                 </div>
-                <div className="user">{userData.name}</div>
+                <div className="user">{userData?.name}</div>
                 <div className="logout" onClick={logoutHandler}>logout</div>
             </div>
             {/* <div className="notification-length">1</div> */}

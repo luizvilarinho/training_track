@@ -25,7 +25,7 @@
 .metas .distribuicaoMacrosContainer .item{
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 300px;
     margin-top: 15px;
 }
 .metas .porcentagem{
@@ -35,5 +35,11 @@
     font-weight: 700;
     color: var(--primary-color-light);
     vertical-align: bottom;
+    margin-left:25px;
 }
 
+@media (max-width: 600px) {
+    .metas .distribuicaoMacrosContainer .item{
+        width: 100%;
+    }
+}

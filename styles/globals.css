@@ -70,6 +70,7 @@ h3{
   background-color: var(--primary-color);
   padding: 8px 15px;
   text-align: right;
+  font-size: 1rem;
 }
 #top-alert .alert-ico{
   display: inline-block;
@@ -95,6 +96,9 @@ h3{
 .logo{
   font-weight: 600;
   color: #c3b7ec;
+}
+.logo svg{
+  width: 30px;
 }
 
 .version{
@@ -460,6 +464,16 @@ div.hide > h1{
 .alertShow{
   top: 0;
   
+}
+.esqueci{
+  text-align: right;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+button[disabled]{
+  opacity: .5;
+  pointer-events: none;
 }
 
 @media (max-width: 600px) {

@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useMemo, useState} from "react"
+import React, {Fragment, useEffect, useState} from "react"
 import useGet from "../../components/hooks/useGet";
 import Refeicao from "../../components/Refeicao";
 import styles from "./containerCalorias.module.css"
@@ -55,7 +55,7 @@ const Calorias = () => {
             <div>
                 <HeaderComponent userData={""}/>
             </div>
-            { alimentos.loading ? (
+            { alimentos.loading || alimentosList.loading ? (
                 <Fragment>
                     <div className="loading">
                         <div className="loading-ico">
@@ -107,7 +107,7 @@ const Calorias = () => {
 
 
                     <div className={'md-mar--top align--center'}>
-                        <Link href={'/'}>
+                        <Link href={'/'} passHref>
                             <button className={'secundary-btn'}>
                          <span style={{marginRight:'5px'}}>
                             <FontAwesomeIcon icon={faCircleArrowLeft} />

@@ -27,6 +27,7 @@ const HomeCardCalorias:  React.FC<Props> = (props: Props) => {
 
     useEffect(()=>{
         console.log("PROPS", props)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
         <div className={`${styles.homeCardCalorias}`}>

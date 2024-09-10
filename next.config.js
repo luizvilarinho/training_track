@@ -7,4 +7,9 @@ const nextConfig = {
     assetPrefix: '/training/'
 }
 
+// const nextConfig = {
+//     basePath: '/training',
+//     assetPrefix: '/training/'
+// }
+
 module.exports = nextConfig
