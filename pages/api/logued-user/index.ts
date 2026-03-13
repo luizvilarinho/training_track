@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Auth } from "../middleware/auth"
 import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { Auth } from "../middleware/auth";
 
 const prisma:PrismaClient = new PrismaClient()
 
@@ -76,7 +76,9 @@ async function loguedUser(request: NextApiRequest, response: NextApiResponse){
                 response.status(200).json([{success:true, user}])
         
             }catch (error) {
-                return error
+                console.error("LOGUED-USER ERROR:", error)
+                response.status(500).json({ success: false, message: 'internal server error' })
+                return
             }finally{
                 prisma.$disconnect()
             }

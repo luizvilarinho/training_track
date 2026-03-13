@@ -10,10 +10,14 @@ services:
       - './:/app:cached'
       - '/app/node_modules'
     depends_on:
-      - training_db
+      training_db:
+        condition: service_healthy
     environment:
       - CHOKIDAR_USEPOLLING=true
       - DATABASE_HOST=training_db
+    networks:
+      - default
+      - shared_network
 
   training_db:
     image: postgres
@@ -27,6 +31,15 @@ services:
     ports:
       - '5432:5432'
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  shared_network:
+    external: true
 
 volumes:
   training_db:

@@ -12,8 +12,9 @@ export default async function caloriasAPI(
 
   switch(req.method){
     case 'GET':
+      console.log("RESPONSECALORIAS-1")
       let response = await fetch(`${process.env.API_CALORIAS}/api/`)
-  
+      console.log("RESPONSECALORIAS", response)
       let respJson =  await response.json()
   
      
