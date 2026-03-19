@@ -103,7 +103,7 @@ const Home: NextPage = () => {
           </Card>
 
           {dados.data.length > 0 && (
-            <Card title="último treino" containerClass="flex-container gap-30">
+            <Card title="último treino" containerClass="flex-container gap-70">
               {dados.loading ? (
                 <div className="loading-ico loading-center">
                   <FontAwesomeIcon icon={faSpinner} />
@@ -132,7 +132,7 @@ const Home: NextPage = () => {
       <article className='version'>
         <div style={styleRodape}>
           <small>sugestões: <strong>luizvilarinho@zohomail.com</strong></small>
-          <small>v1.0.6</small>
+          <small>v1.0.7</small>
         </div>
       </article>
     </>

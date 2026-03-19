@@ -1,12 +1,19 @@
+.card {
+    margin: 0 15px;
+}
+
+.card section {
+    margin: 0;
+}
+
 .card .recuperarCredenciais{
     color: var(--primary-color-light);
 }
 
-
 @media (min-width: 1000px) {
     .card{
         max-width: 60vw;
-        margin: 35px auto;
+        margin: 15px auto;
     }
 
 }

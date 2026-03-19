@@ -2,13 +2,13 @@
   position: fixed;
   width: 100%;
   height: auto;
-  background-color: #1a2e1a;
+  background-color: var(--accent-green-light);
   border-bottom: 2px solid var(--accent-green);
   font-size: 1rem;
   font-weight: 600;
   padding: 16px 20px;
   text-align: center;
-  color: var(--accent-green);
+  color: #1a5f3c;
   z-index: 500;
   letter-spacing: .04em;
 }

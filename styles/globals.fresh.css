@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TRAINING TRACK — FRESH & LIGHT DESIGN
+   TRAINING TRACK — REDESIGN FRESH & LIGHT
    Tema: Leve, elegante e focado em saúde/fitness
    ========================================================================== */
 
@@ -18,10 +18,10 @@
   --bg-card-elevated: #FFFFFF;
   --bg-input: #F3F4F6;
   
-  /* Texto (Contraste legível - estilo Notion) */
-  --text-primary: #37352f;
-  --text-muted: #787774;
-  --text-placeholder: #9b9a97;
+  /* Texto (Contraste legível sem ser harsh) */
+  --text-primary: #1F2937;
+  --text-muted: #6B7280;
+  --text-placeholder: #9CA3AF;
   
   /* Acentos (Fresh & Health) */
   --accent-green: #10B981;
@@ -73,12 +73,8 @@ a:hover {
   color: var(--primary-color-dark);
 }
 
-#top-alert a {
-  color: var(--text-primary);
-}
-
 body {
-  background-color: #ebebeb;
+  background-color: var(--bg-color-light);
   min-height: 100vh;
   height: auto;
   color: var(--text-primary);
@@ -102,6 +98,16 @@ div.main {
    TYPOGRAPHY
    ========================================================================== */
 
+h3 {
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 12px;
+  color: var(--text-primary);
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 label {
   width: 100%;
   margin-left: 5px;
@@ -112,14 +118,8 @@ label {
   text-transform: uppercase;
 }
 
-h3 {
-  border-bottom: 1px solid var(--border-color-light);
-  padding-bottom: 12px;
-  color: var(--text-muted);
-  font-size: .75rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  font-weight: 700;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -136,21 +136,18 @@ h3 {
   box-shadow: var(--shadow-sm);
 }
 
-#top-alert .alert-ico {
-  display: inline-block;
-  width: 18%;
+.logo {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+  letter-spacing: .02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  text-align: left;
-  vertical-align: middle;
-  width: 60%;
-  margin: 0 auto;
-  color: var(--text-primary);
+.logo svg {
+  width: 22px;
 }
 
 .user, .logout {
@@ -169,32 +166,12 @@ h3 {
   color: var(--primary-color-dark);
 }
 
-.logo {
-  font-weight: 700;
-  color: var(--primary-color);
-  font-size: 1rem;
-  letter-spacing: .02em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo svg {
-  width: 22px;
-}
-
 .version {
   width: 60%;
   margin: 0 auto;
   font-size: 0.7rem;
   color: var(--text-muted);
   padding: 10px 0 20px 20px;
-}
-
-#top-alert img {
-  vertical-align: middle;
-  opacity: .8;
-  cursor: pointer;
 }
 
 /* ==========================================================================
@@ -316,77 +293,14 @@ header {
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
 }
 
-nav {
-  padding: 8px 12px;
-  height: 100%;
-}
-
-nav ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  gap: 6px;
-}
-
 nav li {
-  background-color: transparent;
-  height: 100%;
-  width: calc(100% / 3 - 8px);
-  padding: 6px;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-weight: 600;
-  font-size: .62rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
   color: var(--text-muted);
-  cursor: pointer;
-}
-
-nav li svg {
-  font-size: 1.25rem;
 }
 
 nav li.active {
   background: var(--primary-color-ultra-light);
   color: var(--primary-color);
   box-shadow: none;
-}
-
-nav li:active {
-  transform: scale(0.93);
-}
-
-/* ==========================================================================
-   SELECTS
-   ========================================================================== */
-
-select {
-  display: inline-block;
-  height: 44px;
-  width: 100%;
-  padding-left: 14px;
-  background-color: var(--bg-input);
-  color: var(--text-primary);
-  appearance: none;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  font-size: .9rem;
-}
-
-#mes-select {
-  width: 71%;
-  margin-right: 10px;
-}
-
-#ano-select {
-  width: 25%;
 }
 
 /* ==========================================================================
@@ -398,23 +312,9 @@ select {
   grid-template-columns: repeat(8, 1fr);
 }
 
-.grid-semana > div {
-  text-align: center;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-}
-
-.gr {
-  display: flex;
-  gap: 5px;
-}
-
-.gr span {
-  padding: 5px;
-  width: 30px;
 }
 
 .dia {
@@ -425,18 +325,15 @@ select {
   background: var(--bg-card);
 }
 
-.dia.off {
-  border: 1px solid transparent;
-}
-
 .dia.worked {
   background-color: var(--primary-color);
   color: white;
   box-shadow: var(--shadow-glow);
 }
 
-.dias-container {
-  display: flex;
+.today {
+  border: 2px solid var(--accent-orange) !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
 }
 
 /* ==========================================================================
@@ -449,57 +346,6 @@ select {
 .xl-mar--top    { margin-top: 60px; }
 .sm-mar--bottom { margin-bottom: 15px; }
 .md-mar--bottom { margin-bottom: 30px; }
-.md-mar--right  { margin-right: 30px; }
-.sm-mar--left   { margin-left: 15px; }
-.md-mar--left   { margin-left: 30px; }
-
-.flex-container-collumn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--text-muted);
-  width: 30%;
-}
-
-.flex-container-collumn img,
-h4 img {
-  filter: var(--filter-primary-color);
-}
-
-.flex-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.space-between {
-  justify-content: space-between;
-  margin-top: 3px;
-}
-
-.align--center {
-  text-align: center;
-  align-items: center;
-}
-
-.align-right {
-  text-align: right;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.gap-30 {
-  gap: 30px;
-}
-
-.gap-70 {
-  gap: 70px;
-}
-
-section#last-section {
-  margin-bottom: calc(10px + var(--header-height));
-}
 
 /* ==========================================================================
    WORKOUT CARDS
@@ -529,60 +375,6 @@ section#last-section {
   color: var(--primary-color);
 }
 
-.img-title {
-  filter: var(--filter-primary-color);
-  vertical-align: middle;
-}
-
-.plus-ico {
-  margin-right: 5px;
-}
-
-/* ==========================================================================
-   FORM ADD WORKOUT
-   ========================================================================== */
-
-.combo-add-treino {
-  display: grid;
-  grid-template-columns: repeat(3, 33%);
-}
-
-.combo-add-cardio {
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-}
-
-.add-serie-container {
-  display: flex;
-  justify-content: space-around;
-  width: 150px;
-  z-index: 2;
-  margin: 0 auto;
-}
-
-.combo-add-cardio .add-serie-container {
-  justify-content: space-between;
-}
-
-.combo-add-treino svg,
-.combo-add-cardio svg {
-  font-size: 1.6rem;
-  cursor: pointer;
-  color: var(--primary-color-light);
-}
-
-.combo-add-treino svg:active,
-.combo-add-cardio svg:active {
-  font-size: 1.3rem;
-  color: var(--accent-green);
-  transform: scale(0.9);
-}
-
-form .data {
-  display: flex;
-  justify-content: space-between;
-}
-
 /* ==========================================================================
    ACCENTS & BADGES
    ========================================================================== */
@@ -603,118 +395,10 @@ form .data {
 
 .tomato { color: var(--accent-red); }
 .green { color: var(--accent-green); }
-.red-alert-message { color: var(--accent-red); }
-
-/* ==========================================================================
-   NOTIFICATION & ALERTS
-   ========================================================================== */
-
-.notification-length {
-  position: absolute;
-  display: inline-block;
-  background-color: var(--accent-red);
-  color: white;
-  font-size: .7rem;
-  padding: 6px 3px;
-  border-radius: 4px;
-  left: 94%;
-  top: .5%;
-  z-index: 1;
-  text-align: center;
-  min-width: 15px;
-}
-
-.alertHide {
-  top: -56px;
-}
-
-.alertShow {
-  top: 0;
-}
-
-.esqueci {
-  text-align: right;
-  color: var(--primary-color);
-  cursor: pointer;
-}
-
-/* ==========================================================================
-   CALENDAR / AGENDA
-   ========================================================================== */
-
-.number-day {
-  color: var(--text-muted);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: .65rem;
-  font-weight: 600;
-}
-
-.dia.worked .number-day {
-  color: #b9b9b8;
-}
-
-.today {
-  border: 2px solid var(--accent-orange) !important;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
-}
-
-div.hide {
-  position: absolute;
-  left: 600px;
-  z-index: 1;
-}
-
-div.hide > h1 {
-  transform: translateX(100px);
-  opacity: 0;
-}
-
-/* ==========================================================================
-   CONTAINERS & SEARCH
-   ========================================================================== */
-
-.buttons-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.search-container input,
-.search-container button {
-  display: inline-block;
-  border-radius: 0;
-}
-
-.search-container input {
-  width: 80%;
-  height: 50px;
-}
-
-.search-container button {
-  width: 20%;
-  padding: 15px;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.inactive {
-  opacity: 0.4;
-  pointer-events: none;
-}
 
 /* ==========================================================================
    MACRO CHIPS & CALORIE DISPLAY
    ========================================================================== */
-
-.cardio-container__tipo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
 
 .macroChip {
   background: var(--bg-color-light);
@@ -775,16 +459,11 @@ div.hide > h1 {
    SKELETON LOADING
    ========================================================================== */
 
-@keyframes shimmer {
-  0%   { background-position: -400% 0; }
-  100% { background-position:  400% 0; }
-}
-
 .shimmer {
   background: linear-gradient(
     90deg,
     #f0f0f0 25%,
-    #e8e8e8 50%,
+    #e0e0e0 50%,
     #f0f0f0 75%
   );
   background-size: 400% 100%;
@@ -792,27 +471,12 @@ div.hide > h1 {
   border-radius: 10px;
 }
 
-.shimmer-line {
-  height: 14px;
-  margin-bottom: 10px;
-  border-radius: 7px;
-}
-
-.shimmer-circle {
-  border-radius: 50%;
-}
-
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 
 @media (min-width: 1000px) {
-  .menu,
-  .version {
-    width: 60%;
-  }
-  
-  .card {
+  .card{
     max-width: 60vw;
     margin: 24px auto;
   }

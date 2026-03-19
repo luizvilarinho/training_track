@@ -22,10 +22,10 @@ function UltimoTreino({ workoutData }: Props) {
   return (
     <>
       {/* Summary badges */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
-        <span className="stat-badge">{workoutData?.date}</span>
-        <span className="stat-badge">{totalExercises} exerc.</span>
-        <span className="stat-badge">{totalSets} séries</span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+        <span className="stat-badge" style={{ flex: 1, textAlign: 'center' }}>{workoutData?.date}</span>
+        <span className="stat-badge" style={{ flex: 1, textAlign: 'center' }}>{totalExercises} exerc.</span>
+        <span className="stat-badge" style={{ flex: 1, textAlign: 'center' }}>{totalSets} séries</span>
       </div>
 
       <div style={{ width: '100%' }}>
