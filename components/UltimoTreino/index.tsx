@@ -1,68 +1,84 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image'
-import calendar from "../../public/assets/img/i_schedule_school_date_time.svg"
-import { Workout } from "../types"
+import { Workout } from "../types";
 
-
-
-// import { Container } from './styles';
 type Props = {
-    workoutData: any
+  workoutData: any
 }
 
 function UltimoTreino({ workoutData }: Props) {
-
   const [treinosMusculacao, setTreinosMusculacao] = useState<any>();
   const [treinosCardio, setTreinosCardio] = useState<any>();
 
-  useEffect(()=>{
-    if((!treinosMusculacao || !treinosCardio) && workoutData != undefined){
-        let cardios = workoutData.training.filter((treino:Workout)=> treino.type === 2)
-        let musculacao = workoutData.training.filter((treino:Workout)=> treino.type === 1)
-
-        setTreinosCardio(cardios)
-        setTreinosMusculacao(musculacao)
-
+  useEffect(() => {
+    if ((!treinosMusculacao || !treinosCardio) && workoutData != undefined) {
+      setTreinosCardio(workoutData.training.filter((t: Workout) => t.type === 2));
+      setTreinosMusculacao(workoutData.training.filter((t: Workout) => t.type === 1));
     }
-  }, [treinosMusculacao, treinosCardio, workoutData])
+  }, [treinosMusculacao, treinosCardio, workoutData]);
 
-    return (
-        <>
-            <div className="flex-container-collumn align--center">
-            <Image src={calendar} width={30} height={30} alt="calendario" />
-            <div className="sm-mar--top">{workoutData?.date}</div>
-          </div>
-          
-          <div>
-            <div>
-            
-              {treinosMusculacao && treinosMusculacao.length > 0 && <h4>musculação</h4>}
-              {treinosMusculacao && treinosMusculacao.map((workout:Workout)=>{
-                    return (<div key={workout.id} className="flex-container space-between sm-mar--bottom">
-                        <div className="md-mar--right">{workout.description}</div>
-                        <div className="bold">{workout.sets} séries</div>
-                    </div>)
-                 
-                  
-                  
-              })}
+  const totalSets = workoutData?.training?.reduce((acc: number, t: any) => acc + t.sets, 0) || 0;
+  const totalExercises = workoutData?.training?.length || 0;
 
-              {treinosCardio && treinosCardio.length > 0 && <h4 className="sm-mar--top">cardio</h4>}
-              {treinosCardio && treinosCardio.map((cardio:any)=>{
-                 return <div key={cardio.id} className="sm-mar--bottom">
-                      <div className="flex-container space-between">
-                          <div className="md-mar--right">{cardio.description}</div>
-                          <div className="bold">{cardio.sets} min</div>
-                      </div>
+  return (
+    <>
+      {/* Summary badges */}
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+        <span className="stat-badge">{workoutData?.date}</span>
+        <span className="stat-badge">{totalExercises} exerc.</span>
+        <span className="stat-badge">{totalSets} séries</span>
+      </div>
+
+      <div style={{ width: '100%' }}>
+        {treinosMusculacao && treinosMusculacao.length > 0 && (
+          <>
+            <h4 style={{
+              fontSize: '.65rem',
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              color: 'var(--text-muted)',
+              fontWeight: 700,
+              marginBottom: '10px',
+            }}>
+              musculação
+            </h4>
+            {treinosMusculacao.map((workout: Workout) => (
+              <div key={workout.id} className="flex-container space-between sm-mar--bottom">
+                <div style={{ color: 'var(--text-primary)' }}>{workout.description}</div>
+                <div className="bold" style={{ color: 'var(--primary-color-light)' }}>
+                  {workout.sets} séries
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+
+        {treinosCardio && treinosCardio.length > 0 && (
+          <>
+            <h4 style={{
+              fontSize: '.65rem',
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              color: 'var(--text-muted)',
+              fontWeight: 700,
+              margin: '14px 0 10px',
+            }}>
+              cardio
+            </h4>
+            {treinosCardio.map((cardio: any) => (
+              <div key={cardio.id} className="sm-mar--bottom">
+                <div className="flex-container space-between">
+                  <div style={{ color: 'var(--text-primary)' }}>{cardio.description}</div>
+                  <div className="bold" style={{ color: 'var(--accent-green)' }}>
+                    {cardio.sets} min
                   </div>
-              })}
-              
-            </div>
-          
-            
-          </div>
-        </>
-    );
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default UltimoTreino;

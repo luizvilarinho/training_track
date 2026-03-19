@@ -1,78 +1,165 @@
-.homeCardCalorias{
-    /*display: grid;*/
-    /*grid-template-columns: 1fr 1fr;*/
-    width: 100%;
-    overflow: hidden;
-    padding-bottom:25px;
-}
-.homeCardCalorias table{
-    width: 100%;
-
-}
-.homeCardCalorias th.none{
-    background-color: #f6f2fb;
-    border-bottom: unset;
-}
-.homeCardCalorias th{
-    color: var(--primary-color);
-    /*border-bottom: 1px solid #c2adff;*/
-    /*background-color: var(--primary-color-light);*/
-    border-radius: 2px;
-    width: 16.666%;
-    padding:8px;
-}
-.homeCardCalorias th span{
-    margin:0 auto;
-    display: block;
-    width: 80%;
-    border-bottom: 1px solid #c2adff;
-}
-.homeCardCalorias td{
-   text-align: center;
-    font-weight: 700;
-    color: var(--primary-color-light);
-}
-.homeCardCalorias .values{
-    color: var(--primary-color)
+.homeCardCalorias {
+  width: 100%;
+  padding-bottom: 8px;
 }
 
-.homeCardCalorias button{
-    margin: 0 auto;
-    padding: 15px;
-    margin:25px 25px 5px 25px;
+/* Calorie Ring */
+.ringSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 8px;
 }
 
-.homeCardCalorias .btnContainer{
-    margin-top:15px;
-    text-align: center;
-    /*border-top: 1px dashed #c2adff;*/
-}
-.homeCardCalorias .resumoCalorias{
-    display: flex;
-    margin-top: 30px;
-    width: 100%;
-   justify-content: center;
-}
-.homeCardCalorias .resumoCalorias div{
-   margin: 0 20px;
-   
-}
-.homeCardCalorias .resumoCalorias small{
-    color: #c2adff;
-}
-.homeCardCalorias .resumoCalorias span{
-    display: block;
-}
-.homeCardCalorias .containerBtn{
-    display: flex;
-    justify-content: center;
+.ringWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.ringCenter {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
 
-@media (max-width: 600px) {
-    .homeCardCalorias .resumoCalorias{
-        justify-content: space-between;
-    }
-  
-  }
+.ringValue {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
 
+.ringLabel {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.ringMeta {
+  font-size: .68rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Ring stats row */
+.ringStats {
+  display: flex;
+  gap: 28px;
+  margin-top: 18px;
+}
+
+.ringStatItem {
+  text-align: center;
+}
+
+.ringStatValue {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ringStatValue.green  { color: var(--accent-green); }
+.ringStatValue.red    { color: var(--accent-red); }
+.ringStatValue.purple { color: var(--primary-color-light); }
+
+.ringStatLabel {
+  display: block;
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Macro chips */
+.macrosSection {
+  margin-top: 20px;
+  padding: 0 2px;
+}
+
+.macrosSectionTitle {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.macroChips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.macroChip {
+  background: var(--primary-color-ultra-light);
+  border-radius: 10px;
+  padding: 10px 8px;
+  border: 1px solid rgba(125, 96, 211, 0.1);
+}
+
+.macroHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 7px;
+}
+
+.macroLabel {
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.macroValue {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.macroBar {
+  height: 4px;
+  background: rgba(125, 96, 211, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.macroBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+
+.macroMeta {
+  font-size: .58rem;
+  color: var(--text-muted);
+}
+
+/* Action buttons */
+.containerBtn {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.containerBtn button {
+  flex: 1;
+  padding: 14px;
+  font-size: .82rem;
+}

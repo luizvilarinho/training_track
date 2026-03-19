@@ -22,6 +22,7 @@ function DeleteHandler(props:Props){
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             }).then(response=>{
                 response.json().then((data: any)=>{
                     setDados({...dados, data, loading:false});

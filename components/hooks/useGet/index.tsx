@@ -23,7 +23,8 @@ function GetHandler(props:Props){
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'ttaccess': localStorage.getItem('ttaccess') || ''
-            }
+            },
+            credentials: 'include'
             }).then(response=>{
                 if(response.status === 401 || response.status === 500){
                     router.push({

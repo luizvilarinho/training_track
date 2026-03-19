@@ -11,7 +11,7 @@ type Props = {
 function Card(props: Props) {
     return (
         <div className={styles.card} >
-            <section style={{margin:'10px', padding:'15px'}}>
+            <section style={{margin:'8px', padding:'16px'}}>
                 <h3>{props.title}</h3>
                 <article className={props.containerClass}>
 

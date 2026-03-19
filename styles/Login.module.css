@@ -1,7 +1,7 @@
 .loginMenu{
     padding: 15px 0;
     margin-right: 25px;
-    color: rgb(219, 215, 230);
+    color: var(--text-muted);
     cursor: pointer;
 }
 .flex{

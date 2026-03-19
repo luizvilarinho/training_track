@@ -1,0 +1,10 @@
+.greeting {
+  padding: 20px 26px 4px;
+}
+
+@media (min-width: 1000px) {
+  .greeting {
+    max-width: 60vw;
+    margin: 0 auto;
+  }
+}

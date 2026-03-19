@@ -1,4 +1,3 @@
-version: '3'
 services:
   training_web:
     build:
@@ -14,6 +13,7 @@ services:
         condition: service_healthy
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
       - DATABASE_HOST=training_db
     networks:
       - default

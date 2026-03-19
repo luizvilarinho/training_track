@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 type Props = {
     url:any;
@@ -12,6 +13,7 @@ const initialState = {
 
 function PostHandler(props:Props){
 
+    const router = useRouter()
     const [dados, setDados] = useState<any>(initialState);
 
     function postCall(payloadCall?:any){
@@ -32,8 +34,13 @@ function PostHandler(props:Props){
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body:JSON.stringify(payload)
             }).then(response=>{
+                if(response.status === 401 || response.status === 500){
+                    router.push({ pathname: '/login' });
+                    return;
+                }
                 response.json().then((data: any)=>{
                     setDados({...dados, data, loading:false});
                 })
