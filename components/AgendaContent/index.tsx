@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Iworkout } from '../types';
 import Semana from './Semana';
-import {Idia} from './types';
+import { Idia } from './types';
 
 type Props = {
    workouts:Array<Iworkout>
@@ -18,6 +18,7 @@ type IdiasArray = {
     w3:Array<diasTreino>
     w4:Array<diasTreino>
     w5:Array<diasTreino>
+    w6:Array<diasTreino>
 }
 
 function AgendaContent({ workouts }:Props) {
@@ -47,7 +48,8 @@ function AgendaContent({ workouts }:Props) {
         w2: [],
         w3: [],
         w4: [],
-        w5: []
+        w5: [],
+        w6: []
     });
 
     useEffect(()=>{
@@ -79,6 +81,7 @@ function AgendaContent({ workouts }:Props) {
         let w3 = []
         let w4 = []
         let w5 = []
+        let w6 = []
          
         w1 = primeirDiaDoMes === 0? new Array(6).fill({dia:0, workoutId:0}) : new Array(parseFloat(primeirDiaDoMes) - 1).fill({dia:0, workoutId:0})
         var diasTotais = auxDiasNoMes(parseFloat(mes))
@@ -101,6 +104,9 @@ function AgendaContent({ workouts }:Props) {
             }else if(w5.length < 7 ) {
                 let workoutId = auxVerifyIfHasTraining(i)
                 w5.push({dia: i, workoutId})
+            }else if(w6.length < 7 ) {
+                let workoutId = auxVerifyIfHasTraining(i)
+                w6.push({dia: i, workoutId})
             }
         }
         
@@ -110,7 +116,13 @@ function AgendaContent({ workouts }:Props) {
             }while(w5.length < 7)
         }
         
-        setDiasArray({...diasArray, w1,w2, w3, w4, w5 })
+        if(w6.length < 7 && w6.length > 0){
+            do{
+                w6.push({dia:0, workoutId:0})
+            }while(w6.length < 7)
+        }
+        
+        setDiasArray({...diasArray, w1,w2, w3, w4, w5, w6 })
     }
 
     function changeMonthHandler(e:string) {
@@ -152,7 +164,8 @@ function AgendaContent({ workouts }:Props) {
                 <Semana label="w2" diasArray={diasArray.w2} mes={mes} />
                 <Semana label="w3" diasArray={diasArray.w3} mes={mes} />
                 <Semana label="w4" diasArray={diasArray.w4} mes={mes} />
-                <Semana label="w5"diasArray={diasArray.w5}  mes={mes} />
+                <Semana label="w5" diasArray={diasArray.w5} mes={mes} />
+                {diasArray.w6.length > 0 && <Semana label="w6" diasArray={diasArray.w6} mes={mes} />}
             </div>
         </>
     );

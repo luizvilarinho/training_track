@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import useGet from '../hooks/useGet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons'
+import { faDumbbell, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
 
 const HeaderComponent = ({userData}:any) =>{
 
     const [logoutData, logoutCall] = useGet({url:process.env.NEXT_PUBLIC_LOGOUT})
-    
+    const [menuOpen, setMenuOpen] = useState(false)
+    const menuRef = useRef<HTMLDivElement>(null)
+
     const router = useRouter()
 
     function logoutHandler(){
@@ -25,6 +27,16 @@ const HeaderComponent = ({userData}:any) =>{
         }
     }, [logoutData, router])
 
+    useEffect(() => {
+        function handleClickOutside(e: MouseEvent) {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setMenuOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
     return (
         <section id="top-alert">
             <div className="menu">
@@ -33,19 +45,27 @@ const HeaderComponent = ({userData}:any) =>{
                     <Link href={'/'} passHref>
                         Training Track
                     </Link>
-                   
                 </div>
-                <div className="user">{userData?.name}</div>
-                <div className="logout" onClick={logoutHandler}>logout</div>
+                <div className="menu-right">
+                    <div className="user">{userData?.name}</div>
+                    <div className="logout" onClick={logoutHandler}>logout</div>
+                    <div className="hamburger-wrapper" ref={menuRef}>
+                        <button className="hamburger-btn" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+                            <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} />
+                        </button>
+                        {menuOpen && (
+                            <nav className="dropdown-menu">
+                                <Link href="/calorias" passHref><a onClick={() => setMenuOpen(false)}>Calorias</a></Link>
+                                <Link href="/treino/plano" passHref><a onClick={() => setMenuOpen(false)}>Treino</a></Link>
+                            </nav>
+                        )}
+                    </div>
+                </div>
             </div>
-            {/* <div className="notification-length">1</div> */}
-            {/* <div className="alert-ico">
-                <Image src={circle_notifications_white_24dp} width={35} height={35} alt={'ícone circular'}/>
-            </div> */}
         </section>
     )
 
-    
+
 }
 
   

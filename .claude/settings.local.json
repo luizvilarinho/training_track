@@ -8,7 +8,10 @@
       "Bash(docker-compose down:*)",
       "Bash(docker-compose up:*)",
       "Bash(dir:*)",
-      "Bash(cmd:*)"
+      "Bash(cmd:*)",
+      "Bash(wc:*)",
+      "WebFetch(domain:skills.sh)",
+      "WebSearch"
     ]
   }
 }
